@@ -4,6 +4,8 @@ import LogOutButton from '../LogOutButton/LogOutButton';
 import './Nav.css';
 import { useSelector } from 'react-redux';
 
+// TODO - turn this into a hamburger menu
+
 function Nav() {
   const user = useSelector((store) => store.user);
 
@@ -29,8 +31,21 @@ function Nav() {
             </Link>
 
             <Link className="navLink" to="/info">
-              Info Page
+              Info
             </Link>
+
+            <Link className="navLink" to="/display">
+              View
+            </Link>
+
+            <Link className="navLink" to="/entry">
+              Add
+            </Link>
+
+            <Link className="navLink" to="/favorites">
+              Favs
+            </Link>
+
 
             <LogOutButton className="navLink" />
           </>
