@@ -1,15 +1,27 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+
+// store
 
 function EntryPage() {
+  const dispatch = useDispatch();
+  const user = useSelector((store) => store.user);
+
+  useEffect(() => {
+    dispatch({ type: "FETCH_USER_EXPERIENCE" });
+  }, []);
+
   const [experienceToSend, setExperienceToSend] = useState({
     exp_name: "",
     description: "",
     web_path: "",
     photo_path: "",
+    user_id: "",
   });
 
   const sendExperience = (e) => {
     e.preventDefault();
+    setExperienceToSend({ ...experienceToSend, user_id: user.id });
     console.log("Sending: ", experienceToSend);
   };
 
