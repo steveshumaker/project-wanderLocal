@@ -23,6 +23,7 @@ function EntryPage() {
     e.preventDefault();
     setExperienceToSend({ ...experienceToSend, user_id: user.id });
     console.log("Sending: ", experienceToSend);
+    dispatch({ type: "ADD_USER_EXPERIENCE", payload: experienceToSend });
   };
 
   return (

@@ -13,7 +13,7 @@ router.get("/", rejectUnauthenticated, (req, res) => {
   pool
     .query(QUERY)
     .then((result) => {
-      console.log('ROWS --> ', result.rows)
+      console.log("ROWS --> ", result.rows);
       res.send(result.rows).status(200);
     })
     .catch((err) => {
@@ -23,6 +23,20 @@ router.get("/", rejectUnauthenticated, (req, res) => {
 });
 
 // post
+router.post("/", rejectUnauthenticated, (req, res) => {
+  const { exp_name, description, web_path, photo_path, user_id } = req.body;
+  const QUERY = `INSERT INTO experiences 
+  (name, description, web_path, photo_path, user_id) 
+  VALUES ($1, $2, $3, $4, $5);`;
+
+  pool
+    .query(QUERY, [exp_name, description, web_path, photo_path, user_id])
+    .then(res.sendStatus(201))
+    .catch((error) => {
+      console.error(error);
+      res.sendStatus(500);
+    });
+});
 
 // update
 
