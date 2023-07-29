@@ -8,12 +8,13 @@ const router = express.Router();
 
 // get
 router.get("/", rejectUnauthenticated, (req, res) => {
-  const QUERY = `SELECT * FROM experiences;`;
+  const QUERY = `SELECT *, experiences.id AS this_id FROM experiences
+  JOIN "user" ON "user".id = experiences.user_id
+  WHERE "user".id = ${req.user.id};`;
 
   pool
     .query(QUERY)
     .then((result) => {
-      console.log("ROWS --> ", result.rows);
       res.send(result.rows).status(200);
     })
     .catch((err) => {
@@ -24,7 +25,8 @@ router.get("/", rejectUnauthenticated, (req, res) => {
 
 // post
 router.post("/", rejectUnauthenticated, (req, res) => {
-  const { exp_name, description, web_path, photo_path, user_id } = req.body;
+  const { exp_name, description, web_path, photo_path } = req.body;
+  const user_id = req.user.id;
   const QUERY = `INSERT INTO experiences 
   (name, description, web_path, photo_path, user_id) 
   VALUES ($1, $2, $3, $4, $5);`;

@@ -7,10 +7,6 @@ function EntryPage() {
   const dispatch = useDispatch();
   const user = useSelector((store) => store.user);
 
-  useEffect(() => {
-    dispatch({ type: "FETCH_USER_EXPERIENCE" });
-  }, []);
-
   const [experienceToSend, setExperienceToSend] = useState({
     exp_name: "",
     description: "",
