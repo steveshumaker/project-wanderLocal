@@ -1,5 +1,15 @@
+import { useSelector } from "react-redux";
+
 function DisplayPage() {
-  return <div>Display page placeholder</div>;
+  const experiences = useSelector((store) => store.experience);
+
+  return (
+    <div>
+      {experiences.map((experience) => {
+        return <div key={experience.id}>{experience.name}</div>;
+      })}
+    </div>
+  );
 }
 
 export default DisplayPage;
