@@ -37,6 +37,11 @@ function DisplayPage() {
     });
   };
 
+  const handleDeleteClick = (id) => {
+    console.log("deleting id: ", id);
+    dispatch({ type: "DELETE_EXPERIENCE", payload: {delId: id} });
+  };
+
   return (
     <div>
       {experiences.map((experience) => {
@@ -72,6 +77,9 @@ function DisplayPage() {
                 <p>{experience.description}</p>
                 <button onClick={() => handleEditClick(experience)}>
                   Edit
+                </button>
+                <button onClick={() => handleDeleteClick(experience.this_id)}>
+                  Delete
                 </button>
               </>
             )}

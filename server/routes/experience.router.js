@@ -44,7 +44,7 @@ router.post("/", rejectUnauthenticated, (req, res) => {
 // update
 router.put("/", rejectUnauthenticated, (req, res) => {
   const { id, name, description } = req.body;
-  QUERY = `UPDATE experiences SET name=$1, description=$2 WHERE id=$3;`;
+  const QUERY = `UPDATE experiences SET name=$1, description=$2 WHERE id=$3;`;
 
   pool
     .query(QUERY, [name, description, id])
@@ -56,5 +56,17 @@ router.put("/", rejectUnauthenticated, (req, res) => {
 });
 
 // delete
+router.delete("/", rejectUnauthenticated, (req, res) => {
+  const idToDel = req.body.delId;
+  const QUERY = `DELETE FROM experiences WHERE id=$1;`;
+
+  pool
+    .query(QUERY, [idToDel])
+    .then((result) => res.sendStatus(200))
+    .catch((error) => {
+      console.error(error);
+      res.sendStatus(500);
+    });
+});
 
 module.exports = router;
