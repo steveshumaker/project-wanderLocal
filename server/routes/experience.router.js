@@ -10,7 +10,8 @@ const router = express.Router();
 router.get("/", rejectUnauthenticated, (req, res) => {
   const QUERY = `SELECT *, experiences.id AS this_id FROM experiences
   JOIN "user" ON "user".id = experiences.user_id
-  WHERE "user".id = ${req.user.id};`;
+  WHERE "user".id = ${req.user.id}
+  ORDER BY experiences.id;`;
 
   pool
     .query(QUERY)
@@ -41,6 +42,18 @@ router.post("/", rejectUnauthenticated, (req, res) => {
 });
 
 // update
+router.put("/", rejectUnauthenticated, (req, res) => {
+  const { id, name, description } = req.body;
+  QUERY = `UPDATE experiences SET name=$1, description=$2 WHERE id=$3;`;
+
+  pool
+    .query(QUERY, [name, description, id])
+    .then((result) => res.sendStatus(200))
+    .catch((error) => {
+      console.log(error);
+      res.sendStatus(500);
+    });
+});
 
 // delete
 
