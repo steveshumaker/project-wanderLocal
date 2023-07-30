@@ -24,6 +24,26 @@ router.get("/", rejectUnauthenticated, (req, res) => {
     });
 });
 
+// PLACEHOLDER FOR FAVORITES ROUTE
+// this can be refactored/moved to one GET route with a conditional/database update
+// router.get("/favorites", rejectUnauthenticated, (req, res) => {
+//   const QUERY = `SELECT *, experiences.id AS this_id FROM experiences
+//   JOIN "user" ON "user".id = experiences.user_id
+//   WHERE "user".id = ${req.user.id}
+//   AND favorite = TRUE
+//   ORDER BY experiences.id;`;
+
+//   pool
+//     .query(QUERY)
+//     .then((result) => {
+//       res.send(result.rows).status(200);
+//     })
+//     .catch((err) => {
+//       console.error(err);
+//       res.sendStatus(500);
+//     });
+// });
+
 // post
 router.post("/", rejectUnauthenticated, (req, res) => {
   const { exp_name, description, web_path, photo_path } = req.body;

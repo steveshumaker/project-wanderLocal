@@ -5,7 +5,8 @@ function DisplayPage() {
   // init dispatch
   const dispatch = useDispatch();
 
-  // fetch user's experiences on page load
+  // fetch user's experiences on page load 
+  // TODO - this should happen after a succesful login
   useEffect(() => {
     dispatch({ type: "FETCH_USER_EXPERIENCE" });
   }, []);
