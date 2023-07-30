@@ -1,9 +1,11 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
 
 // store
 
 function EntryPage() {
+  const history = useHistory();
   const dispatch = useDispatch();
   const user = useSelector((store) => store.user);
 
@@ -20,6 +22,7 @@ function EntryPage() {
     setExperienceToSend({ ...experienceToSend, user_id: user.id });
     console.log("Sending: ", experienceToSend);
     dispatch({ type: "ADD_USER_EXPERIENCE", payload: experienceToSend });
+    history.push("/display");
   };
 
   return (
