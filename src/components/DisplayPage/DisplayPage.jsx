@@ -20,10 +20,7 @@ function DisplayPage() {
 
   // handles the save button click; cancel handled in jsx
   const sendUpdate = (id) => {
-    console.log("updating number ", id);
-    console.log("sending updates: ", editToSend);
     setEditingId(null);
-    // send put
     dispatch({ type: "UPDATE_EXPERIENCE", payload: editToSend });
   };
 
@@ -37,9 +34,18 @@ function DisplayPage() {
     });
   };
 
+  // handles the delete button click
   const handleDeleteClick = (id) => {
-    console.log("deleting id: ", id);
-    dispatch({ type: "DELETE_EXPERIENCE", payload: {delId: id} });
+    dispatch({ type: "DELETE_EXPERIENCE", payload: { delId: id } });
+  };
+
+  // toggle functionality for favorite button
+  const handleFavoriteClick = (experience) => {
+    console.log("favoriting id: ", experience.this_id);
+    dispatch({
+      type: "UPDATE_EXPERIENCE",
+      payload: { favId: experience.this_id, favorite: experience.favorite },
+    });
   };
 
   return (
@@ -75,6 +81,10 @@ function DisplayPage() {
               <>
                 <p>{experience.name}</p>
                 <p>{experience.description}</p>
+                {experience.favorite ? <p>Fav</p> : null}
+                <button onClick={() => handleFavoriteClick(experience)}>
+                  Heart
+                </button>
                 <button onClick={() => handleEditClick(experience)}>
                   Edit
                 </button>

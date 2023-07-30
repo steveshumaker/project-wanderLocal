@@ -43,16 +43,29 @@ router.post("/", rejectUnauthenticated, (req, res) => {
 
 // update
 router.put("/", rejectUnauthenticated, (req, res) => {
-  const { id, name, description } = req.body;
-  const QUERY = `UPDATE experiences SET name=$1, description=$2 WHERE id=$3;`;
+  // const { id, name, description, favorite } = req.body;
+  let QUERY = "";
+  if (req.body.favorite === true || req.body.favorite === false) {
+    QUERY = `UPDATE experiences SET favorite=$1 WHERE id=$2;`;
 
-  pool
-    .query(QUERY, [name, description, id])
-    .then((result) => res.sendStatus(200))
-    .catch((error) => {
-      console.log(error);
-      res.sendStatus(500);
-    });
+    pool
+      .query(QUERY, [!req.body.favorite, req.body.favId])
+      .then((result) => res.sendStatus(200))
+      .catch((error) => {
+        console.error(error);
+        res.sendStatus(500);
+      });
+  } else {
+    QUERY = `UPDATE experiences SET name=$1, description=$2 WHERE id=$3;`;
+
+    pool
+      .query(QUERY, [req.body.name, req.body.description, req.body.id])
+      .then((result) => res.sendStatus(200))
+      .catch((error) => {
+        console.error(error);
+        res.sendStatus(500);
+      });
+  }
 });
 
 // delete
