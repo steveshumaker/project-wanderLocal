@@ -28,15 +28,23 @@ router.get("/", rejectUnauthenticated, (req, res) => {
 // currently, it's handled after the POST in a PUT (POST experience saga
 // to rating saga to PUT in experience saga)
 router.post("/", rejectUnauthenticated, (req, res) => {
-  const { exp_name, description, web_path, photo_path } = req.body;
+  const { exp_name, description, web_path, photo_path, location_desc } =
+    req.body;
   const user_id = req.user.id;
 
   const QUERY = `INSERT INTO experiences 
-  (name, description, web_path, photo_path, user_id) 
-  VALUES ($1, $2, $3, $4, $5);`;
+  (name, description, web_path, photo_path, user_id, location_desc) 
+  VALUES ($1, $2, $3, $4, $5, $6);`;
 
   pool
-    .query(QUERY, [exp_name, description, web_path, photo_path, user_id])
+    .query(QUERY, [
+      exp_name,
+      description,
+      web_path,
+      photo_path,
+      user_id,
+      location_desc,
+    ])
     .then(res.sendStatus(201))
     .catch((error) => {
       console.error(error);
@@ -44,7 +52,7 @@ router.post("/", rejectUnauthenticated, (req, res) => {
     });
 });
 
-// update
+// update TODO - this looks like it can be cleaned up
 router.put("/", rejectUnauthenticated, (req, res) => {
   let QUERY = "";
   if (
@@ -78,7 +86,12 @@ router.put("/", rejectUnauthenticated, (req, res) => {
     QUERY = `UPDATE experiences SET name=$1, description=$2, web_path=$3 WHERE id=$4;`;
 
     pool
-      .query(QUERY, [req.body.name, req.body.description, req.body.web_path, req.body.id])
+      .query(QUERY, [
+        req.body.name,
+        req.body.description,
+        req.body.web_path,
+        req.body.id,
+      ])
       .then((result) => res.sendStatus(200))
       .catch((error) => {
         console.error(error);

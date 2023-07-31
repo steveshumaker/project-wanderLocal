@@ -24,6 +24,7 @@ function ExperienceToDisplay({ experience }) {
       id: experience.this_id,
       name: experience.name,
       description: experience.description,
+      loc_description: experience.loc_description,
       web_path: experience.web_path,
     });
   };
@@ -48,20 +49,21 @@ function ExperienceToDisplay({ experience }) {
         <>
           <p>{experience.name}</p>
           <input
-            value={editToSend.web_path}
-            onChange={(e) => {
-              setEditToSend({
-                ...editToSend,
-                web_path: e.target.value,
-              });
-            }}
-          />
-          <input
             value={editToSend.description}
             onChange={(e) => {
               setEditToSend({
                 ...editToSend,
                 description: e.target.value,
+              });
+            }}
+          />
+          <p>{experience.location_desc}</p>
+          <input
+            value={editToSend.web_path}
+            onChange={(e) => {
+              setEditToSend({
+                ...editToSend,
+                web_path: e.target.value,
               });
             }}
           />
@@ -72,6 +74,7 @@ function ExperienceToDisplay({ experience }) {
         <>
           <p>{experience.name}</p>
           <p>{experience.description}</p>
+          <p>{experience.location_desc}</p>
           {experience.rating ? <p>Reviews: {experience.rating}</p> : null}
           {experience.stars ? (
             <img src={`/yelp_images/small_${Number(experience.stars)}.png`} />

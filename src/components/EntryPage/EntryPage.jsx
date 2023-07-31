@@ -12,6 +12,7 @@ function EntryPage() {
   const [experienceToSend, setExperienceToSend] = useState({
     exp_name: "",
     description: "",
+    location_desc: "",
     web_path: "",
     photo_path: "",
     user_id: "",
@@ -49,6 +50,18 @@ function EntryPage() {
             });
           }}
           id="descIn"
+          type="text"
+        />
+        <label htmlFor="locIn">Location:</label>
+        <input
+          value={experienceToSend.location_desc}
+          onChange={(e) => {
+            setExperienceToSend({
+              ...experienceToSend,
+              location_desc: e.target.value,
+            });
+          }}
+          id="locIn"
           type="text"
         />
         <label htmlFor="webPathIn">Link:</label>
