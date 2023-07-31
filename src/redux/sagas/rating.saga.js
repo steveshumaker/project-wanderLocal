@@ -16,6 +16,7 @@ function* fetchData(action) {
         stars: data.businesses[0].rating,
         reviews: data.businesses[0].review_count,
         web_path: data.businesses[0].url,
+        photo_path: data.business[0].image_url,
         dataId: action.payload.id,
       },
     });

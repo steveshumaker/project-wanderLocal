@@ -72,34 +72,44 @@ function ExperienceToDisplay({ experience }) {
         </>
       ) : (
         <>
-          <p>{experience.name}</p>
-          <p>{experience.description}</p>
-          <p>{experience.location_desc}</p>
-          {experience.rating ? <p>Reviews: {experience.rating}</p> : null}
-          {experience.stars ? (
-            <img src={`/yelp_images/small_${Number(experience.stars)}.png`} />
-          ) : null}
-          <p>
-            {" "}
-            {experience.web_path ? (
-              <a target="_blank" href={experience.web_path}>
-                Link
-              </a>
-            ) : (
-              <a
-                target="_blank"
-                href={`https://www.google.com/search?q=${experience.name}${experience.location_desc}`}
-              >
-                Search
-              </a>
-            )}
-          </p>
-          {experience.favorite ? <p>Fav</p> : null}
-          <button onClick={() => handleFavoriteClick(experience)}>Heart</button>
-          <button onClick={() => handleEditClick(experience)}>Edit</button>
-          <button onClick={() => handleDeleteClick(experience.this_id)}>
-            Delete
-          </button>
+          <div>
+            <p>
+              <img src={experience.photo_path} />
+            </p>
+          </div>
+          <div>
+            <p>{experience.name}</p>
+            <p>{experience.description}</p>
+            <p>{experience.location_desc}</p>
+
+            {experience.rating ? <p>Reviews: {experience.rating}</p> : null}
+            {experience.stars ? (
+              <img src={`/yelp_images/small_${Number(experience.stars)}.png`} />
+            ) : null}
+            <p>
+              {" "}
+              {experience.web_path ? (
+                <a target="_blank" href={experience.web_path}>
+                  Link
+                </a>
+              ) : (
+                <a
+                  target="_blank"
+                  href={`https://www.google.com/search?q=${experience.name}${experience.location_desc}`}
+                >
+                  Search
+                </a>
+              )}
+            </p>
+            {experience.favorite ? <p>Fav</p> : null}
+            <button onClick={() => handleFavoriteClick(experience)}>
+              Heart
+            </button>
+            <button onClick={() => handleEditClick(experience)}>Edit</button>
+            <button onClick={() => handleDeleteClick(experience.this_id)}>
+              Delete
+            </button>
+          </div>
         </>
       )}
     </>
