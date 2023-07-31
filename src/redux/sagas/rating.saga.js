@@ -2,7 +2,9 @@ import { put, takeEvery } from "redux-saga/effects";
 
 function* fetchData(action) {
   try {
-    const response = yield fetch(`/api/rating/${action.payload.name}`);
+    const response = yield fetch(
+      `/api/rating/${action.payload.name}/${action.payload.location_desc}`
+    );
     if (!response.ok) {
       throw new Error("Network response getting business details not OK");
     }

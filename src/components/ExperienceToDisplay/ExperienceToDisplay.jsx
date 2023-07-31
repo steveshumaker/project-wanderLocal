@@ -88,7 +88,7 @@ function ExperienceToDisplay({ experience }) {
             ) : (
               <a
                 target="_blank"
-                href={`https://www.google.com/search?q=${experience.name}`}
+                href={`https://www.google.com/search?q=${experience.name}${experience.location_desc}`}
               >
                 Search
               </a>

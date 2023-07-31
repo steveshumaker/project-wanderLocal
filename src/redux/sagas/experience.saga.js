@@ -25,12 +25,12 @@ function* addExperience(action) {
     if (!response.ok) {
       throw new Error("Network response for POST was not OK");
     }
-    // COMMENTED OUT FOR
-    // const externalResponse = yield put({
-    //   type: "FETCH_EXTERNAL_DATA",
-    //   payload: { name: action.payload.exp_name },
-    // });
-    // console.log(externalResponse);
+    // -------------- COMMENTED OUT FOR LIMITING RATE LIMIT ERRORS ---------------
+    const externalResponse = yield put({
+      type: "FETCH_EXTERNAL_DATA",
+      payload: { name: action.payload.exp_name, location_desc: action.payload.location_desc },
+    });
+    console.log(externalResponse);
     yield put({ type: "FETCH_USER_EXPERIENCE" });
   } catch (error) {
     console.log("Experience post failed: ", error);

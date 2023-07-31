@@ -3,7 +3,7 @@ const router = express.Router();
 
 router.get("/:name/:location", (req, res) => {
   const busName = req.params.name;
-  // const busLoc = req.params.location;
+  const busLoc = req.params.location;
 
   console.log("FETCHING BUSINESS --> ", busName);
   fetch(
