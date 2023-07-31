@@ -72,11 +72,11 @@ function ExperienceToDisplay({ experience }) {
         </>
       ) : (
         <>
-          <div>
+          {/* <div> -------- COMMENTING UNTIL WE HAVE YELP SEARCHES AVAIL ----
             <p>
               <img src={experience.photo_path} />
             </p>
-          </div>
+          </div> */}
           <div>
             <p>{experience.name}</p>
             <p>{experience.description}</p>
