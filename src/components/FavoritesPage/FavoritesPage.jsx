@@ -1,34 +1,29 @@
 import { useSelector, useDispatch } from "react-redux";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
+import ExperienceToDisplay from "../ExperienceToDisplay/ExperienceToDisplay";
 
 function FavoritesPage() {
-  const experiences = useSelector((store) => store.experience);
   const dispatch = useDispatch();
+  const experiences = useSelector((store) => store.experience);
   const favorites = experiences.filter((experience) => {
     return experience.favorite === true;
   });
 
+  useEffect(() => {
+    dispatch({ type: "FETCH_USER_EXPERIENCE" });
+  }, []);
+
   return (
-    <>
-      <div>
-        {favorites.map((experience) => {
-          return (
-            <div key={experience.this_id}>
-              <a
-                href={experience.web_path}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                {experience.name}
-              </a>{" "}
-              | Reviews: {experience.rating} |{" "}
-              <img src={`/yelp_images/small_${Number(experience.stars)}.png`} />{" "}
-              | Path:{" "}
-            </div>
-          );
-        })}
-      </div>
-    </>
+    <div>
+      {favorites.map((experience) => {
+        return (
+          <div key={experience.this_id}>
+            <ExperienceToDisplay experience={experience} />
+            <hr />
+          </div>
+        );
+      })}
+    </div>
   );
 }
 

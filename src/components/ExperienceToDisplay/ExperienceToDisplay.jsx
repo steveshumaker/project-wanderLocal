@@ -72,6 +72,10 @@ function ExperienceToDisplay({ experience }) {
         <>
           <p>{experience.name}</p>
           <p>{experience.description}</p>
+          {experience.rating ? <p>Reviews: {experience.rating}</p> : null}
+          {experience.stars ? (
+            <img src={`/yelp_images/small_${Number(experience.stars)}.png`} />
+          ) : null}
           <p>
             {" "}
             {experience.web_path ? (

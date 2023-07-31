@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from "react-redux";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import ExperienceToDisplay from "../ExperienceToDisplay/ExperienceToDisplay.jsx";
 
 function DisplayPage() {
@@ -19,13 +19,10 @@ function DisplayPage() {
     <div>
       {experiences.map((experience) => {
         return (
-          <>
-            <ExperienceToDisplay
-              key={experience.this_id}
-              experience={experience}
-            />
+          <div key={experience.this_id}>
+            <ExperienceToDisplay experience={experience} />
             <hr />
-          </>
+          </div>
         );
       })}
     </div>
