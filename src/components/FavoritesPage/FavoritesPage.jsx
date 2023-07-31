@@ -24,7 +24,12 @@ function FavoritesPage() {
           return (
             <div key={experience.this_id}>
               {experience.name} | Reviews: {experience.rating} |{" "}
-              {experience.stars}*'s
+              {experience.stars}*'s | Path:{" "}
+              <a
+                href={experience.web_path}
+                target="_blank"
+                rel="noopener noreferrer"
+              ></a>
             </div>
           );
         })}
