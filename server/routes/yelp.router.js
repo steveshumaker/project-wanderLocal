@@ -6,7 +6,7 @@ router.get("/:name", (req, res) => {
 
   console.log("FETCHING BUSINESS --> ", busName);
   fetch(
-    `https://api.yelp.com/v3/businesses/search?location=Nashville&term=${busName}&limit=1`,
+    `https://api.yelp.com/v3/businesses/search?location=Nashville&term=${busName}&limit=1&sort_by=best_match`,
     {
       method: "GET",
       headers: {

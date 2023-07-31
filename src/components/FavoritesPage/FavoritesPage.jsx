@@ -4,36 +4,27 @@ import { useEffect, useState } from "react";
 function FavoritesPage() {
   const experiences = useSelector((store) => store.experience);
   const dispatch = useDispatch();
-  // const favorites = experiences.filter((experience) => {
-  //   return experience.favorite === true;
-  // });
+  const favorites = experiences.filter((experience) => {
+    return experience.favorite === true;
+  });
 
   useEffect(() => {
-    experiences.map((experience) => {
+    favorites.map((experience) => {
       dispatch({
         type: "FETCH_EXTERNAL_DATA",
-        payload: { name: experience.name },
+        payload: { name: experience.name, id: experience.this_id },
       });
     });
-  });
+  }, []);
 
   return (
     <>
       <div>
-        {experiences.map((experience) => {
+        {favorites.map((experience) => {
           return (
             <div key={experience.this_id}>
-              {experience.name}
-              <button
-                onClick={() =>
-                  dispatch({
-                    type: "FETCH_EXTERNAL_DATA",
-                    payload: { name: experience.name },
-                  })
-                }
-              >
-                Click for yelp
-              </button>
+              {experience.name} | Reviews: {experience.rating} |{" "}
+              {experience.stars}*
             </div>
           );
         })}

@@ -25,6 +25,11 @@ function* addExperience(action) {
     if (!response.ok) {
       throw new Error("Network response for POST was not OK");
     }
+    const externalResponse = yield put({
+      type: "FETCH_EXTERNAL_DATA",
+      payload: { name: action.payload.exp_name },
+    });
+    console.log(externalResponse);
     yield put({ type: "FETCH_USER_EXPERIENCE" });
   } catch (error) {
     console.log("Experience post failed: ", error);

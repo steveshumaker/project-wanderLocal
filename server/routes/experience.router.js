@@ -65,11 +65,28 @@ router.post("/", rejectUnauthenticated, (req, res) => {
 router.put("/", rejectUnauthenticated, (req, res) => {
   // const { id, name, description, favorite } = req.body;
   let QUERY = "";
-  if (req.body.favorite === true || req.body.favorite === false) {
+  if (
+    req.body.favorite === true ||
+    (req.body.favorite === false && !req.body.stars)
+  ) {
     QUERY = `UPDATE experiences SET favorite=$1 WHERE id=$2;`;
 
     pool
       .query(QUERY, [!req.body.favorite, req.body.favId])
+      .then((result) => res.sendStatus(200))
+      .catch((error) => {
+        console.error(error);
+        res.sendStatus(500);
+      });
+  } else if (req.body.stars) {
+    QUERY = `UPDATE experiences SET stars=$1, rating=$2, web_path=$3 WHERE id=$4;`;
+    pool
+      .query(QUERY, [
+        req.body.stars,
+        req.body.reviews,
+        req.body.web_path,
+        req.body.dataId,
+      ])
       .then((result) => res.sendStatus(200))
       .catch((error) => {
         console.error(error);

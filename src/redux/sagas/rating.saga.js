@@ -6,11 +6,19 @@ function* fetchData(action) {
     if (!response.ok) {
       throw new Error("Network response getting business details not OK");
     }
-    // const data = JSON.stringify(response.body);
     const data = yield response.json();
-    console.log('PARSED DATA --> ', data);
+    console.log("PARSED DATA --> ", data);
+    yield put({
+      type: "UPDATE_EXPERIENCE",
+      payload: {
+        stars: data.businesses[0].rating,
+        reviews: data.businesses[0].review_count,
+        web_path: data.businesses[0].url,
+        dataId: action.payload.id,
+      },
+    });
   } catch (error) {
-    console.log("Error fetching business details");
+    console.log("Error fetching business details", error);
   }
 }
 
