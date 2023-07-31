@@ -11,7 +11,7 @@ function Footer() {
     <footer>
       &copy; Steve Shumaker
       <hr />
-      Powered by{" "}
+      Ratings and reviews powered by{" "}
       <a target="_blank" href="https://www.yelp.com">
         <img
           style={{ height: "3%", width: "3%" }}

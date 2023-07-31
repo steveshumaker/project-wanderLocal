@@ -21,8 +21,9 @@ function FavoritesPage() {
               >
                 {experience.name}
               </a>{" "}
-              | Reviews: {experience.rating} | {experience.stars}{" "}
-              <img src="/yelp_images/small_5.png" /> | Path:{" "}
+              | Reviews: {experience.rating} |{" "}
+              <img src={`/yelp_images/small_${Number(experience.stars)}.png`} />{" "}
+              | Path:{" "}
             </div>
           );
         })}
