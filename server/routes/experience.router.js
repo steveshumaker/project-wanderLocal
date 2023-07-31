@@ -75,10 +75,10 @@ router.put("/", rejectUnauthenticated, (req, res) => {
         res.sendStatus(500);
       });
   } else {
-    QUERY = `UPDATE experiences SET name=$1, description=$2 WHERE id=$3;`;
+    QUERY = `UPDATE experiences SET name=$1, description=$2, web_path=$3 WHERE id=$4;`;
 
     pool
-      .query(QUERY, [req.body.name, req.body.description, req.body.id])
+      .query(QUERY, [req.body.name, req.body.description, req.body.web_path, req.body.id])
       .then((result) => res.sendStatus(200))
       .catch((error) => {
         console.error(error);
