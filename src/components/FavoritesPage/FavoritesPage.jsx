@@ -1,22 +1,34 @@
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
 
 function FavoritesPage() {
-  const [userFavs, setUserFavs] = useState([]);
   const experiences = useSelector((store) => store.experience);
-  const favorites = experiences.filter((experience) => {
-    return experience.favorite === true;
-  });
-
-  useEffect(() => {
-    setUserFavs(favorites);
-  }, []);
+  const dispatch = useDispatch();
+  // const favorites = experiences.filter((experience) => {
+  //   return experience.favorite === true;
+  // });
 
   return (
     <>
       <div>
-        {favorites.map((experience) => {
-          return <div key={experience.this_id}>{experience.name}</div>;
+        {experiences.map((experience) => {
+          const busName = experience.name.replace(/\s+/g, "");
+
+          return (
+            <div key={experience.this_id}>
+              {experience.name}
+              <button
+                onClick={() =>
+                  dispatch({
+                    type: "FETCH_EXTERNAL_DATA",
+                    payload: { name: busName },
+                  })
+                }
+              >
+                Click for yelp
+              </button>
+            </div>
+          );
         })}
       </div>
     </>
