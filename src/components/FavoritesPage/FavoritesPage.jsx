@@ -12,7 +12,7 @@ function FavoritesPage() {
     <>
       <div>
         {experiences.map((experience) => {
-          const busName = experience.name.replace(/\s+/g, "");
+          // const busName = experience.name.replace(/\s+/g, "");
 
           return (
             <div key={experience.this_id}>
@@ -21,7 +21,7 @@ function FavoritesPage() {
                 onClick={() =>
                   dispatch({
                     type: "FETCH_EXTERNAL_DATA",
-                    payload: { name: busName },
+                    payload: { name: experience.name },
                   })
                 }
               >
