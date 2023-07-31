@@ -8,12 +8,19 @@ function FavoritesPage() {
   //   return experience.favorite === true;
   // });
 
+  useEffect(() => {
+    experiences.map((experience) => {
+      dispatch({
+        type: "FETCH_EXTERNAL_DATA",
+        payload: { name: experience.name },
+      });
+    });
+  });
+
   return (
     <>
       <div>
         {experiences.map((experience) => {
-          // const busName = experience.name.replace(/\s+/g, "");
-
           return (
             <div key={experience.this_id}>
               {experience.name}
