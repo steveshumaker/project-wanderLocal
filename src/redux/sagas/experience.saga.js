@@ -1,4 +1,4 @@
-import { put, take, takeEvery } from "redux-saga/effects";
+import { put, takeEvery } from "redux-saga/effects";
 
 function* fetchExperiences() {
   try {
@@ -25,11 +25,12 @@ function* addExperience(action) {
     if (!response.ok) {
       throw new Error("Network response for POST was not OK");
     }
-    const externalResponse = yield put({
-      type: "FETCH_EXTERNAL_DATA",
-      payload: { name: action.payload.exp_name },
-    });
-    console.log(externalResponse);
+    // COMMENTED OUT FOR
+    // const externalResponse = yield put({
+    //   type: "FETCH_EXTERNAL_DATA",
+    //   payload: { name: action.payload.exp_name },
+    // });
+    // console.log(externalResponse);
     yield put({ type: "FETCH_USER_EXPERIENCE" });
   } catch (error) {
     console.log("Experience post failed: ", error);

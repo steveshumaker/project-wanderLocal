@@ -24,30 +24,13 @@ router.get("/", rejectUnauthenticated, (req, res) => {
     });
 });
 
-// PLACEHOLDER FOR FAVORITES ROUTE
-// this can be refactored/moved to one GET route with a conditional/database update
-// router.get("/favorites", rejectUnauthenticated, (req, res) => {
-//   const QUERY = `SELECT *, experiences.id AS this_id FROM experiences
-//   JOIN "user" ON "user".id = experiences.user_id
-//   WHERE "user".id = ${req.user.id}
-//   AND favorite = TRUE
-//   ORDER BY experiences.id;`;
-
-//   pool
-//     .query(QUERY)
-//     .then((result) => {
-//       res.send(result.rows).status(200);
-//     })
-//     .catch((err) => {
-//       console.error(err);
-//       res.sendStatus(500);
-//     });
-// });
-
-// post
+// post TODO - potentially move the external data into the POST
+// currently, it's handled after the POST in a PUT (POST experience saga
+// to rating saga to PUT in experience saga)
 router.post("/", rejectUnauthenticated, (req, res) => {
   const { exp_name, description, web_path, photo_path } = req.body;
   const user_id = req.user.id;
+
   const QUERY = `INSERT INTO experiences 
   (name, description, web_path, photo_path, user_id) 
   VALUES ($1, $2, $3, $4, $5);`;
@@ -63,7 +46,6 @@ router.post("/", rejectUnauthenticated, (req, res) => {
 
 // update
 router.put("/", rejectUnauthenticated, (req, res) => {
-  // const { id, name, description, favorite } = req.body;
   let QUERY = "";
   if (
     req.body.favorite === true ||

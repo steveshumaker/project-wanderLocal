@@ -8,15 +8,6 @@ function FavoritesPage() {
     return experience.favorite === true;
   });
 
-  useEffect(() => {
-    favorites.map((experience) => {
-      dispatch({
-        type: "FETCH_EXTERNAL_DATA",
-        payload: { name: experience.name, id: experience.this_id },
-      });
-    });
-  }, []);
-
   return (
     <>
       <div>

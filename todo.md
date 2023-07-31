@@ -1,3 +1,10 @@
+## NOTES
+- commented experience.saga.js to reduce being rate limited by yelp
+
+
+## TODO
+
+
 - move populate experiences dispatch to the onclick of a succesful login
 - refactor GET route for favorites query into one route that conditionally queries
 - - the way I see it, favorites can either be a new route/saga/store combo, or add a table to experiences and update queries to POST favorite and GET favorites
