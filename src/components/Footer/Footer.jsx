@@ -1,5 +1,5 @@
-import React from 'react';
-import './Footer.css';
+import React from "react";
+import "./Footer.css";
 
 // This is one of our simplest components
 // It doesn't have local state, so it can be a function component.
@@ -7,7 +7,19 @@ import './Footer.css';
 // or even care what the redux state is, so it doesn't need 'connect()'
 
 function Footer() {
-  return <footer>&copy; Steve Shumaker</footer>;
+  return (
+    <footer>
+      &copy; Steve Shumaker
+      <hr />
+      Powered by{" "}
+      <a target="_blank" href="https://www.yelp.com">
+        <img
+          style={{ height: "3%", width: "3%" }}
+          src="/yelp_images/yelp_logo.png"
+        />
+      </a>
+    </footer>
+  );
 }
 
 export default Footer;

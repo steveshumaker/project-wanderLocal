@@ -14,13 +14,15 @@ function FavoritesPage() {
         {favorites.map((experience) => {
           return (
             <div key={experience.this_id}>
-              {experience.name} | Reviews: {experience.rating} |{" "}
-              {experience.stars}*'s | Path:{" "}
               <a
                 href={experience.web_path}
                 target="_blank"
                 rel="noopener noreferrer"
-              ></a>
+              >
+                {experience.name}
+              </a>{" "}
+              | Reviews: {experience.rating} | {experience.stars}{" "}
+              <img src="/yelp_images/small_5.png" /> | Path:{" "}
             </div>
           );
         })}
