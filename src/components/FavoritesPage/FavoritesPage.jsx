@@ -24,7 +24,7 @@ function FavoritesPage() {
           return (
             <div key={experience.this_id}>
               {experience.name} | Reviews: {experience.rating} |{" "}
-              {experience.stars}*
+              {experience.stars}*'s
             </div>
           );
         })}
