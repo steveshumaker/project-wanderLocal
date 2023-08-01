@@ -34,7 +34,7 @@ router.post("/", rejectUnauthenticated, (req, res) => {
 
   const QUERY = `INSERT INTO experiences 
   (name, description, web_path, photo_path, user_id, location_desc) 
-  VALUES ($1, $2, $3, $4, $5, $6);`;
+  VALUES ($1, $2, $3, $4, $5, $6) RETURNING id;`;
 
   pool
     .query(QUERY, [
@@ -45,7 +45,11 @@ router.post("/", rejectUnauthenticated, (req, res) => {
       user_id,
       location_desc,
     ])
-    .then(res.sendStatus(201))
+    .then((result) => {
+      const createdId = result.rows[0].id;
+      // res.send(response).status(201);
+      res.status(201).json({ id: createdId });
+    })
     .catch((error) => {
       console.error(error);
       res.sendStatus(500);

@@ -72,11 +72,11 @@ function ExperienceToDisplay({ experience }) {
         </>
       ) : (
         <>
-          {/* <div> -------- COMMENTING UNTIL WE HAVE YELP SEARCHES AVAIL ----
+          <div>
             <p>
               <img src={experience.photo_path} />
             </p>
-          </div> */}
+          </div>
           <div>
             <p>{experience.name}</p>
             <p>{experience.description}</p>
@@ -87,7 +87,6 @@ function ExperienceToDisplay({ experience }) {
               <img src={`/yelp_images/small_${Number(experience.stars)}.png`} />
             ) : null}
             <p>
-              {" "}
               {experience.web_path ? (
                 <a target="_blank" href={experience.web_path}>
                   Link
