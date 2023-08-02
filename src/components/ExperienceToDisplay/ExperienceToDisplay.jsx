@@ -82,6 +82,7 @@ function ExperienceToDisplay({ experience }) {
           <CardContent sx={{ flexGrow: 1 }}>
             <Typography>{experience.name}</Typography>
             <Input
+              multiline
               value={editToSend.description}
               onChange={(e) => {
                 setEditToSend({
@@ -92,6 +93,7 @@ function ExperienceToDisplay({ experience }) {
             />
             <p>{experience.location_desc}</p>
             <Input
+              fullWidth
               value={editToSend.web_path}
               onChange={(e) => {
                 setEditToSend({
@@ -125,7 +127,7 @@ function ExperienceToDisplay({ experience }) {
               {experience.name}
               {experience.favorite ? <span> ❤️</span> : null}
             </Typography>
-            <Typography>{experience.description}{" "}</Typography>
+            <Typography>{experience.description} </Typography>
             <Typography>{experience.location_desc}</Typography>
             {experience.rating ? (
               <Typography>Reviews: {experience.rating}</Typography>
