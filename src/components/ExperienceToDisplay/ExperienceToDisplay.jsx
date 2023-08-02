@@ -1,18 +1,23 @@
 import { useDispatch } from "react-redux";
 import { useState } from "react";
 //MUI
-import {
-  Card,
-  CardMedia,
-  CardActions,
-  CardContent,
-  Button,
-  Typography,
-  Link,
-  Input,
-  Container,
-  Grid,
-} from "@mui/material";
+import AppBar from "@mui/material/AppBar";
+import Button from "@mui/material/Button";
+import CameraIcon from "@mui/icons-material/PhotoCamera";
+import Card from "@mui/material/Card";
+import CardActions from "@mui/material/CardActions";
+import CardContent from "@mui/material/CardContent";
+import CardMedia from "@mui/material/CardMedia";
+import CssBaseline from "@mui/material/CssBaseline";
+import Grid from "@mui/material/Grid";
+import Stack from "@mui/material/Stack";
+import Box from "@mui/material/Box";
+import Toolbar from "@mui/material/Toolbar";
+import Typography from "@mui/material/Typography";
+import Container from "@mui/material/Container";
+import Link from "@mui/material/Link";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+import Input from "@mui/material/Input";
 
 function ExperienceToDisplay({ experience }) {
   // local states for editing
@@ -58,132 +63,113 @@ function ExperienceToDisplay({ experience }) {
 
   return (
     <div key={experience.this_id}>
-      <Container sx={{ py: 8 }} maxWidth="md">
-        <Grid container spacing={4}>
-          {isEditing ? (
-            <>
-              <Card
-                sx={{
-                  height: "100%",
-                  display: "flex",
-                  flexDirection: "column",
-                }}
-              >
-                <CardMedia
-                  component="div"
-                  sx={{
-                    // 16:9
-                    pt: "56.25%",
-                  }}
-                  image={experience.photo_path}
-                />
-                <CardContent sx={{ flexGrow: 1 }}>
-                  <Typography>{experience.name}</Typography>
-                  <Input
-                    value={editToSend.description}
-                    onChange={(e) => {
-                      setEditToSend({
-                        ...editToSend,
-                        description: e.target.value,
-                      });
-                    }}
-                  />
-                  <p>{experience.location_desc}</p>
-                  <Input
-                    value={editToSend.web_path}
-                    onChange={(e) => {
-                      setEditToSend({
-                        ...editToSend,
-                        web_path: e.target.value,
-                      });
-                    }}
-                  />
-                  <Button onClick={() => sendUpdate(experience.this_id)}>
-                    Save
-                  </Button>
-                  <Button onClick={() => setEditingId(null)}>Cancel</Button>
-                </CardContent>
-              </Card>
-            </>
-          ) : (
-            <>
-              <Grid item key={experience.this_id} xs={12} sm={6} md={4}>
-                <Card
-                  sx={{
-                    height: "100%",
-                    display: "flex",
-                    flexDirection: "column",
-                  }}
-                >
-                  <CardMedia
-                    component="div"
-                    sx={{
-                      // 16:9
-                      pt: "56.25%",
-                    }}
-                    image={experience.photo_path}
-                  />
-                  <CardContent sx={{ flexGrow: 1 }}>
-                    <Typography gutterBottom variant="h5" component="h2">
-                      {experience.name}
-                      {experience.favorite ? <span> ❤️</span> : null}
-                    </Typography>
-                    <Typography>{experience.description}</Typography>
-                    <Typography>{experience.location_desc}</Typography>
-                    {experience.rating ? (
-                      <Typography>Reviews: {experience.rating}</Typography>
-                    ) : null}
+      {isEditing ? (
+        <Card
+          sx={{
+            height: "100%",
+            display: "flex",
+            flexDirection: "column",
+          }}
+        >
+          <CardMedia
+            component="div"
+            sx={{
+              // 16:9
+              pt: "56.25%",
+            }}
+            image={experience.photo_path}
+          />
+          <CardContent sx={{ flexGrow: 1 }}>
+            <Typography>{experience.name}</Typography>
+            <Input
+              value={editToSend.description}
+              onChange={(e) => {
+                setEditToSend({
+                  ...editToSend,
+                  description: e.target.value,
+                });
+              }}
+            />
+            <p>{experience.location_desc}</p>
+            <Input
+              value={editToSend.web_path}
+              onChange={(e) => {
+                setEditToSend({
+                  ...editToSend,
+                  web_path: e.target.value,
+                });
+              }}
+            />
+            <Button onClick={() => sendUpdate(experience.this_id)}>Save</Button>
+            <Button onClick={() => setEditingId(null)}>Cancel</Button>
+          </CardContent>
+        </Card>
+      ) : (
+        <Card
+          sx={{
+            height: "100%",
+            display: "flex",
+            flexDirection: "column",
+          }}
+        >
+          <CardMedia
+            component="div"
+            sx={{
+              // 16:9
+              pt: "56.25%",
+            }}
+            image={experience.photo_path}
+          />
+          <CardContent sx={{ flexGrow: 1 }}>
+            <Typography gutterBottom variant="h5" component="h2">
+              {experience.name}
+              {experience.favorite ? <span> ❤️</span> : null}
+            </Typography>
+            <Typography>{experience.description}{" "}</Typography>
+            <Typography>{experience.location_desc}</Typography>
+            {experience.rating ? (
+              <Typography>Reviews: {experience.rating}</Typography>
+            ) : null}
 
-                    {experience.stars ? (
-                      <img
-                        src={`/yelp_images/small_${Number(
-                          experience.stars
-                        )}.png`}
-                      />
-                    ) : null}
-                    {experience.web_path ? (
-                      <Typography>
-                        <Link target="_blank" href={experience.web_path}>
-                          Link Placeholder
-                        </Link>
-                      </Typography>
-                    ) : (
-                      <Typography>
-                        <Link
-                          target="_blank"
-                          href={`https://www.google.com/search?q=${experience.name}${experience.location_desc}`}
-                        >
-                          Search
-                        </Link>
-                      </Typography>
-                    )}
-                  </CardContent>
-                  <CardActions>
-                    <Button
-                      onClick={() => handleFavoriteClick(experience)}
-                      size="small"
-                    >
-                      ❤️
-                    </Button>
-                    <Button
-                      onClick={() => handleEditClick(experience)}
-                      size="small"
-                    >
-                      Edit
-                    </Button>
-                    <Button
-                      onClick={() => handleDeleteClick(experience.this_id)}
-                      size="small"
-                    >
-                      Edit
-                    </Button>
-                  </CardActions>
-                </Card>
-              </Grid>
-            </>
-          )}
-        </Grid>
-      </Container>
+            {experience.stars ? (
+              <img src={`/yelp_images/small_${Number(experience.stars)}.png`} />
+            ) : null}
+            {experience.web_path ? (
+              <Typography>
+                <Link target="_blank" href={experience.web_path}>
+                  Link Placeholder
+                </Link>
+              </Typography>
+            ) : (
+              <Typography>
+                <Link
+                  target="_blank"
+                  href={`https://www.google.com/search?q=${experience.name}${experience.location_desc}`}
+                >
+                  Search
+                </Link>
+              </Typography>
+            )}
+          </CardContent>
+          <CardActions>
+            <Button
+              onClick={() => handleFavoriteClick(experience)}
+              size="small"
+            >
+              ❤️
+            </Button>
+            <Button onClick={() => handleEditClick(experience)} size="small">
+              Edit
+            </Button>
+            <Button
+              onClick={() => handleDeleteClick(experience.this_id)}
+              size="small"
+            >
+              Delete
+            </Button>
+          </CardActions>
+        </Card>
+      )}
     </div>
   );
 }

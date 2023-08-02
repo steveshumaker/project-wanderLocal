@@ -2,9 +2,22 @@ import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
 import ExperienceToDisplay from "../ExperienceToDisplay/ExperienceToDisplay.jsx";
 // MUI
-import Box from "@mui/material/Box";
-import { Container, Typography } from "@mui/material";
+import AppBar from "@mui/material/AppBar";
+import Button from "@mui/material/Button";
+import CameraIcon from "@mui/icons-material/PhotoCamera";
+import Card from "@mui/material/Card";
+import CardActions from "@mui/material/CardActions";
+import CardContent from "@mui/material/CardContent";
+import CardMedia from "@mui/material/CardMedia";
+import CssBaseline from "@mui/material/CssBaseline";
 import Grid from "@mui/material/Grid";
+import Stack from "@mui/material/Stack";
+import Box from "@mui/material/Box";
+import Toolbar from "@mui/material/Toolbar";
+import Typography from "@mui/material/Typography";
+import Container from "@mui/material/Container";
+import Link from "@mui/material/Link";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
 
 function DisplayPage() {
   // init dispatch
@@ -21,36 +34,42 @@ function DisplayPage() {
 
   return (
     <div>
-      <Box
-        sx={{
-          bgcolor: "background.paper",
-          pt: 8,
-          pb: 6,
-        }}
-      >
-        <Container maxWidth="sm">
-          <Typography
-            component="h1"
-            variant="h2"
-            align="center"
-            color="text.primary"
-            gutterBottom
-          >
-            Username Placeholder
-          </Typography>
+      <CssBaseline />
+      <main>
+        <Box
+          sx={{
+            bgcolor: "background.paper",
+            pt: 8,
+            pb: 6,
+          }}
+        >
+          <Container maxWidth="sm">
+            <Typography
+              component="h1"
+              variant="h2"
+              align="center"
+              color="text.primary"
+              gutterBottom
+            >
+              Username Placeholder
+            </Typography>
+          </Container>
+        </Box>
+        <Container sx={{ py: 8 }} maxWidth="md">
+          <Grid container spacing={4}>
+            {experiences.map((experience) => {
+              return (
+                <Grid item key={experience.this_id} xs={18} sm={9} md={6}>
+                  <ExperienceToDisplay
+                    key={experience.this_id}
+                    experience={experience}
+                  />
+                </Grid>
+              );
+            })}
+          </Grid>
         </Container>
-      </Box>
-
-
-          {experiences.map((experience) => {
-            return (
-              <ExperienceToDisplay
-                key={experience.this_id}
-                experience={experience}
-              />
-            );
-          })}
-
+      </main>
     </div>
   );
 }
