@@ -11,6 +11,7 @@ import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import Link from "@mui/material/Link";
 import Input from "@mui/material/Input";
+import Image from "@mui/icons-material/Image";
 
 function ExperienceToDisplay({ experience }) {
   // local states for editing
@@ -132,7 +133,10 @@ function ExperienceToDisplay({ experience }) {
             {experience.web_path ? (
               <Typography>
                 <Link target="_blank" href={experience.web_path}>
-                  Link Placeholder
+                  <img
+                    style={{ height: "1.25rem" }}
+                    src="yelp_images/yelp_logo.png"
+                  />
                 </Link>
               </Typography>
             ) : (
@@ -141,7 +145,10 @@ function ExperienceToDisplay({ experience }) {
                   target="_blank"
                   href={`https://www.google.com/search?q=${experience.name}${experience.location_desc}`}
                 >
-                  Search
+                  <img
+                    style={{ height: "1.25rem" }}
+                    src="yelp_images/google_png.png"
+                  />
                 </Link>
               </Typography>
             )}

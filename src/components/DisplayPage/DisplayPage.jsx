@@ -44,7 +44,12 @@ function DisplayPage() {
             >
               {user.username}'s experiences.
             </Typography>
-            <Typography variant="h5" align="center" color="text.secondary" paragraph>
+            <Typography
+              variant="h5"
+              align="center"
+              color="text.secondary"
+              paragraph
+            >
               click ❤️ to favorite
             </Typography>
           </Container>
