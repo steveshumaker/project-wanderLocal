@@ -20,14 +20,14 @@
 
 redux logger
 
-add tags to items
+add tags to items [done]
 - init state array
 - entry field
 - - handle comma and space as submit
 - when each tag is submitted, update the state array with the new tag
 - when the item is added, send post to database
 
-add tags to database
+add tags to database [done]
 - modify post to add an array [need to modify experiences]
 
 display all items

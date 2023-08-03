@@ -24,6 +24,22 @@ router.get("/", rejectUnauthenticated, (req, res) => {
     });
 });
 
+// get ALL experiences (search page)
+router.get("/all", rejectUnauthenticated, (req, res) => {
+  const QUERY = `SELECT *, experiences.id AS this_id FROM experiences
+  ORDER BY experiences.id;`;
+
+  pool
+    .query(QUERY)
+    .then((result) => {
+      res.send(result.rows).status(200);
+    })
+    .catch((err) => {
+      console.error(err);
+      res.sendStatus(500);
+    });
+});
+
 // post
 router.post("/", rejectUnauthenticated, (req, res) => {
   const {

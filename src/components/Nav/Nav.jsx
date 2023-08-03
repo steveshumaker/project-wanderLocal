@@ -6,8 +6,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 // MUI
 import AppBar from "@mui/material/AppBar";
-import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
+
 import { Link as rLink } from "react-router-dom";
 import CssBaseline from "@mui/material/CssBaseline";
 import Toolbar from "@mui/material/Toolbar";
@@ -38,7 +37,14 @@ function Nav() {
         <Toolbar sx={{ flexWrap: "wrap" }}>
           <Typography variant="h6" color="inherit" noWrap sx={{ flexGrow: 1 }}>
             wanderLocal
-            <Link color="text.primary" href="/#search" sx={{ my: 1, mx: 1.5 }}>
+            <Link
+              onClick={() => {
+                dispatch({ type: "FETCH_ALL_EXPERIENCES" });
+              }}
+              color="text.primary"
+              href="/#search"
+              sx={{ my: 1, mx: 1.5 }}
+            >
               🔎
             </Link>
           </Typography>
