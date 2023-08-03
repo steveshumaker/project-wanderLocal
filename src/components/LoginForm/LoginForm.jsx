@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
+// MUI
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -41,6 +42,7 @@ function LoginForm() {
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
+          border: "1px solid gray",
         }}
       >
         <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
@@ -51,9 +53,9 @@ function LoginForm() {
         </Typography>
         <Box component="form" noValidate sx={{ mt: 1 }} onSubmit={login}>
           {errors.loginMessage && (
-            <h3 className="alert" role="alert">
+            <Typography variant="h3" className="alert" role="alert">
               {errors.loginMessage}
-            </h3>
+            </Typography>
           )}
           <div>
             <TextField
@@ -63,7 +65,7 @@ function LoginForm() {
               id="username"
               label="Username"
               name="username"
-              autoComplete="email"
+              autoComplete="username"
               autoFocus
               value={username}
               onChange={(event) => setUsername(event.target.value)}
