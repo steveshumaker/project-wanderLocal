@@ -2,14 +2,13 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 // MUI
-import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
 import Box from "@mui/material/Box";
-import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
+import Chip from "@mui/material/Chip";
 
 // store
 
@@ -27,11 +26,22 @@ function EntryPage() {
     user_id: "",
   });
 
+  const [tags, setTags] = useState([]);
+
   const sendExperience = (e) => {
     e.preventDefault();
     setExperienceToSend({ ...experienceToSend, user_id: user.id });
     dispatch({ type: "ADD_USER_EXPERIENCE", payload: experienceToSend });
     history.push("/display");
+  };
+
+  const handleKeyPress = (e) => {
+    const key = e.key;
+    if (e.key === "," || e.key === " ") {
+      // handle the comma persisting
+      setTags([...tags, e.target.value]);
+      e.target.value = "";
+    }
   };
 
   return (
@@ -57,7 +67,7 @@ function EntryPage() {
             <TextField
               margin="normal"
               fullWidth
-              label="Experience name"
+              label="name."
               autoFocus
               value={experienceToSend.exp_name}
               onChange={(e) => {
@@ -72,21 +82,7 @@ function EntryPage() {
             <TextField
               margin="normal"
               fullWidth
-              label="Give your experience a description"
-              value={experienceToSend.description}
-              onChange={(e) => {
-                setExperienceToSend({
-                  ...experienceToSend,
-                  description: e.target.value,
-                });
-              }}
-              id="descIn"
-              type="text"
-            />
-            <TextField
-              margin="normal"
-              fullWidth
-              label="City, State"
+              label="city, state."
               value={experienceToSend.location_desc}
               onChange={(e) => {
                 setExperienceToSend({
@@ -100,7 +96,21 @@ function EntryPage() {
             <TextField
               margin="normal"
               fullWidth
-              label="URL"
+              label="description."
+              value={experienceToSend.description}
+              onChange={(e) => {
+                setExperienceToSend({
+                  ...experienceToSend,
+                  description: e.target.value,
+                });
+              }}
+              id="descIn"
+              type="text"
+            />
+            <TextField
+              margin="normal"
+              fullWidth
+              label="url."
               value={experienceToSend.web_path}
               onChange={(e) => {
                 setExperienceToSend({
@@ -114,7 +124,7 @@ function EntryPage() {
             <TextField
               margin="normal"
               fullWidth
-              label="Add a pic!"
+              label="pics."
               value={experienceToSend.photo_path}
               onChange={(e) => {
                 setExperienceToSend({
@@ -125,6 +135,22 @@ function EntryPage() {
               id="photoPathIn"
               type="text"
             />
+            <TextField
+              margin="normal"
+              fullWidth
+              label="tags."
+              value={tags[-1]}
+              onKeyDown={(e) => handleKeyPress(e)}
+              id="tagsIn"
+              type="text"
+            />
+            <Typography>
+              {tags.length > 0
+                ? tags.map((tag) => {
+                    return <Chip label={tag} />; // give tags a key
+                  })
+                : null}
+            </Typography>
             <Button
               fullWidth
               variant="contained"
@@ -136,6 +162,9 @@ function EntryPage() {
             <center>
               <Button variant="contained" sx={{ mb: 2, width: "18em" }}>
                 Cancel
+              </Button>
+              <Button onClick={() => console.log(tags)}>
+                Press to log tags
               </Button>
             </center>
           </Box>
