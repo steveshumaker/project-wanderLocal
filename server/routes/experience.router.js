@@ -24,17 +24,22 @@ router.get("/", rejectUnauthenticated, (req, res) => {
     });
 });
 
-// post TODO - potentially move the external data into the POST
-// currently, it's handled after the POST in a PUT (POST experience saga
-// to rating saga to PUT in experience saga)
+// post
 router.post("/", rejectUnauthenticated, (req, res) => {
-  const { exp_name, description, web_path, photo_path, location_desc } =
-    req.body;
+  const {
+    exp_name,
+    description,
+    web_path,
+    photo_path,
+    location_desc,
+    exp_tags,
+  } = req.body;
+  console.log(exp_tags);
   const user_id = req.user.id;
 
   const QUERY = `INSERT INTO experiences 
-  (name, description, web_path, photo_path, user_id, location_desc) 
-  VALUES ($1, $2, $3, $4, $5, $6) RETURNING id;`;
+  (name, description, web_path, photo_path, user_id, location_desc, tags) 
+  VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING id;`;
 
   pool
     .query(QUERY, [
@@ -44,6 +49,7 @@ router.post("/", rejectUnauthenticated, (req, res) => {
       photo_path,
       user_id,
       location_desc,
+      exp_tags,
     ])
     .then((result) => {
       const createdId = result.rows[0].id;

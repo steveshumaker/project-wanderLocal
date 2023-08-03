@@ -17,29 +17,33 @@ function EntryPage() {
   const dispatch = useDispatch();
   const user = useSelector((store) => store.user);
 
+  const [tags, setTags] = useState([]);
   const [experienceToSend, setExperienceToSend] = useState({
     exp_name: "",
     description: "",
     location_desc: "",
     web_path: "",
     photo_path: "",
+    exp_tags: [],
     user_id: "",
   });
 
-  const [tags, setTags] = useState([]);
-
   const sendExperience = (e) => {
     e.preventDefault();
-    setExperienceToSend({ ...experienceToSend, user_id: user.id });
-    dispatch({ type: "ADD_USER_EXPERIENCE", payload: experienceToSend });
+    const updatedExperience = {
+      ...experienceToSend,
+      user_id: user.id,
+      exp_tags: tags,
+    };
+    setExperienceToSend(updatedExperience);
+    dispatch({ type: "ADD_USER_EXPERIENCE", payload: updatedExperience });
     history.push("/display");
   };
 
   const handleKeyPress = (e) => {
-    const key = e.key;
     if (e.key === "," || e.key === " ") {
       // handle the comma persisting
-      setTags([...tags, e.target.value]);
+      setTags([...tags, e.target.value.trim()]);
       e.target.value = "";
     }
   };
@@ -140,7 +144,9 @@ function EntryPage() {
               fullWidth
               label="tags."
               value={tags[-1]}
-              onKeyDown={(e) => handleKeyPress(e)}
+              onKeyDown={(e) => {
+                handleKeyPress(e);
+              }}
               id="tagsIn"
               type="text"
             />
@@ -162,9 +168,6 @@ function EntryPage() {
             <center>
               <Button variant="contained" sx={{ mb: 2, width: "18em" }}>
                 Cancel
-              </Button>
-              <Button onClick={() => console.log(tags)}>
-                Press to log tags
               </Button>
             </center>
           </Box>
