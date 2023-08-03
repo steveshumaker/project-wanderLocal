@@ -11,7 +11,7 @@ import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import Link from "@mui/material/Link";
 import Input from "@mui/material/Input";
-import Image from "@mui/icons-material/Image";
+import Chip from "@mui/material/Chip";
 
 function ExperienceToDisplay({ experience }) {
   // local states for editing
@@ -152,6 +152,11 @@ function ExperienceToDisplay({ experience }) {
                 </Link>
               </Typography>
             )}
+            {experience.tags
+              ? experience.tags.map((tag) => {
+                  return <Chip key={tag} label={tag} />;
+                })
+              : null}
           </CardContent>
           <CardActions>
             <Button

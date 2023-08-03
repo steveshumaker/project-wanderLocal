@@ -48,6 +48,10 @@ function EntryPage() {
     }
   };
 
+  const handleCancel = () => {
+    history.push("/display");
+  };
+
   return (
     <div>
       <Container component="main" maxWidth="xs">
@@ -150,13 +154,11 @@ function EntryPage() {
               id="tagsIn"
               type="text"
             />
-            <Typography>
-              {tags.length > 0
-                ? tags.map((tag) => {
-                    return <Chip label={tag} />; // give tags a key
-                  })
-                : null}
-            </Typography>
+            {tags.length > 0
+              ? tags.map((tag) => {
+                  return <Chip key={tag} label={tag} />; // give tags a key
+                })
+              : null}
             <Button
               fullWidth
               variant="contained"
@@ -166,7 +168,11 @@ function EntryPage() {
               Save
             </Button>
             <center>
-              <Button variant="contained" sx={{ mb: 2, width: "18em" }}>
+              <Button
+                onClick={handleCancel}
+                variant="contained"
+                sx={{ mb: 2, width: "18em" }}
+              >
                 Cancel
               </Button>
             </center>
