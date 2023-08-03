@@ -1,7 +1,4 @@
 ## NOTES
-- commented experience.saga.js and experienceToDisplay to reduce being rate limited by yelp and because we don't have the image URL
-- - need to test that the image shows up
-- - need to test location param added to the yelp query
 
 
 ## TODO

@@ -2,7 +2,8 @@ import React from "react";
 // import { Link } from "react-router-dom";
 import LogOutButton from "../LogOutButton/LogOutButton";
 import "./Nav.css";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
 // MUI
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
@@ -18,6 +19,8 @@ import { Link } from "@mui/material";
 
 function Nav() {
   const user = useSelector((store) => store.user);
+  const history = useHistory();
+  const dispatch = useDispatch();
 
   return (
     <div>
@@ -82,13 +85,21 @@ function Nav() {
                   >
                     ❤️
                   </Link>
+                  <Link
+                    variant="button"
+                    color="text.primary"
+                    href="/#user"
+                    sx={{ my: 1, mx: 1.5 }}
+                    onClick={() => {
+                      dispatch({ type: "LOGOUT" });
+                    }}
+                  >
+                    Log out
+                  </Link>
                 </>
               )}
             </div>
           </nav>
-          <Button href="#" variant="outlined" sx={{ my: 1, mx: 1.5 }}>
-            Login
-          </Button>
         </Toolbar>
       </AppBar>
     </div>

@@ -55,6 +55,7 @@ function App() {
             Visiting localhost:3000/user will show the UserPage if the user is logged in.
             If the user is not logged in, the ProtectedRoute will show the LoginPage (component).
             Even though it seems like they are different pages, the user is always on localhost:3000/user */}
+
           <ProtectedRoute
             // logged in shows UserPage else shows LoginPage
             exact
@@ -71,6 +72,19 @@ function App() {
             <InfoPage />
           </ProtectedRoute>
 
+          <ProtectedRoute exact path="/display">
+            <DisplayPage />
+          </ProtectedRoute>
+
+          <ProtectedRoute exact path="/favorites">
+            <FavoritesPage />
+          </ProtectedRoute>
+
+          <ProtectedRoute exact path="/entry">
+            <EntryPage />
+          </ProtectedRoute>
+
+          {/* HELPER CONDITIONAL LOGIN */}
           <Route exact path="/login">
             {user.id ? (
               // If the user is already logged in,
@@ -104,18 +118,8 @@ function App() {
             )}
           </Route>
 
-          {/* --- Content Routing Start --- */}
-          <Route exact path="/display">
-            <DisplayPage />
-          </Route>
 
-          <Route exact path="/entry">
-            <EntryPage />
-          </Route>
 
-          <Route exact path="/favorites">
-            <FavoritesPage />
-          </Route>
 
           {/* If none of the other routes matched, we will show a 404. */}
           <Route>
