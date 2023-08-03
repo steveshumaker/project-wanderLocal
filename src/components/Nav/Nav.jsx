@@ -56,18 +56,10 @@ function Nav() {
                   <Link
                     variant="button"
                     color="text.primary"
-                    href="/#user"
-                    sx={{ my: 1, mx: 1.5 }}
-                  >
-                    Home
-                  </Link>
-                  <Link
-                    variant="button"
-                    color="text.primary"
                     href="/#display"
                     sx={{ my: 1, mx: 1.5 }}
                   >
-                    Display
+                    Home
                   </Link>
                   <Link
                     variant="button"
@@ -85,17 +77,7 @@ function Nav() {
                   >
                     ❤️
                   </Link>
-                  <Link
-                    variant="button"
-                    color="text.primary"
-                    href="/#user"
-                    sx={{ my: 1, mx: 1.5 }}
-                    onClick={() => {
-                      dispatch({ type: "LOGOUT" });
-                    }}
-                  >
-                    Log out
-                  </Link>
+                  <LogOutButton /> 
                 </>
               )}
             </div>

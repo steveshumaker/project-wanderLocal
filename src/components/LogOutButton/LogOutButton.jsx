@@ -1,24 +1,24 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
-import Typography from "@mui/material/Typography";
+import Button from "@mui/material/Button";
 
 function LogOutButton(props) {
   const history = useHistory();
   const dispatch = useDispatch();
   return (
-    <Typography
+    <Button
       // This button shows up in multiple locations and is styled differently
       // because it's styled differently depending on where it is used, the className
       // is passed to it from it's parents through React props
       // className={props.className}
       onClick={() => {
-        history.push("/login");
         dispatch({ type: "LOGOUT" });
+        setTimeout(() => history.push("/login"), 100);
       }}
     >
       Log Out
-    </Typography>
+    </Button>
   );
 }
 

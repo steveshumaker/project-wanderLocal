@@ -18,4 +18,7 @@
 3. extract stars and review count [done]
 4. develop some sort of ranking [or just display stars? - done]
 
+redux logger
+
+
 
