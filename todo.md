@@ -10,9 +10,9 @@
 - move populate experiences dispatch to the onclick of a succesful login
 - refactor GET route for favorites query into one route that conditionally queries
 - - the way I see it, favorites can either be a new route/saga/store combo, or add a table to experiences and update queries to POST favorite and GET favorites
-- basic styling
+- basic styling [ok]
 - filter-able 'view' page
-- I think making 'info' into a non-protected route that lists a collage of experiences by location could be cool
+- I think making 'info' into a non-protected route that lists a collage of experiences by location could be cool [priority]
 - remove unneeded components
 
 
