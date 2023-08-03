@@ -38,7 +38,16 @@ function Nav() {
         <Toolbar sx={{ flexWrap: "wrap" }}>
           <Typography variant="h6" color="inherit" noWrap sx={{ flexGrow: 1 }}>
             wanderLocal
+            <Link
+              variant="button"
+              color="text.primary"
+              href="/#search"
+              sx={{ my: 1, mx: 1.5 }}
+            >
+              🔎
+            </Link>
           </Typography>
+
           <nav>
             <div>
               {!user.id && (
@@ -77,7 +86,7 @@ function Nav() {
                   >
                     ❤️
                   </Link>
-                  <LogOutButton /> 
+                  <LogOutButton />
                 </>
               )}
             </div>

@@ -22,6 +22,7 @@ import RegisterPage from "../RegisterPage/RegisterPage";
 import DisplayPage from "../DisplayPage/DisplayPage";
 import EntryPage from "../EntryPage/EntryPage";
 import FavoritesPage from "../FavoritesPage/FavoritesPage";
+import SearchPage from "../SearchPage/SearchPage";
 
 import "./App.css";
 
@@ -116,6 +117,10 @@ function App() {
               // Otherwise, show the Landing page
               <LandingPage />
             )}
+          </Route>
+
+          <Route exact path="/search">
+            <SearchPage />
           </Route>
 
           {/* If none of the other routes matched, we will show a 404. */}
