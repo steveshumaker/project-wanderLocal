@@ -20,5 +20,24 @@
 
 redux logger
 
+add tags to items
+- init state array
+- entry field
+- - handle comma and space as submit
+- when each tag is submitted, update the state array with the new tag
+- when the item is added, send post to database
 
+add tags to database
+- modify post to add an array [need to modify experiences]
+
+display all items
+- get all items on page load
+- init search bar and search state
+- user can add a search tag [future - click on search tag to add]
+- - commans and spaces rule applies
+- while the search state is not empty:
+- - display the tags at the top
+- - filter the experiences for those that include tags
+- - display those
+- once search bar is empty, display all experiences
 
