@@ -2,24 +2,27 @@
 
 
 ## TODO
-
-
 - move populate experiences dispatch to the onclick of a succesful login [like it where it is]
-- refactor GET route for favorites query into one route that conditionally queries
+- refactor GET route for favorites query into one route that conditionally queries [this would fix the refresh issue]
 - - the way I see it, favorites can either be a new route/saga/store combo, or add a table to experiences and update queries to POST favorite and GET favorites
 - basic styling [ok]
-- filter-able 'view' page [search page AND/OR list page?]
-- I think making 'info' into a non-protected route that lists a collage of experiences by location could be cool [priority]
+- - *more* styling
+- filter-able 'view' page [search page AND/OR list page?] [done!][have some todos below]
+- I think making 'info' into a non-protected route that lists a collage of experiences by location could be cool [this would be nice]
 - remove unneeded components
+- for display: should we have location headers?
+- Info/about page
 
 
-1. business name -> business details [no - generic search w correct params]
-2. business details.id -> id search - might not need this [we dont]
-3. extract stars and review count [done]
-4. develop some sort of ranking [or just display stars? - done]
 
-redux logger
+## Search page
+- Any user can navigate to this page
+- Once on the page, they can click on tags to display experiences that contain that/those tags
+# TODO: 
+- Refresh kills the page. You also need to nav away then back to populate the tags. There's got to be a way to fix that
 
+
+### Search feature notes
 add tags to items [done]
 - init state array
 - entry field
@@ -41,4 +44,10 @@ display all items
 - - filter the experiences for those that include tags
 - - display those
 - once search bar is empty, display all experiences
+
+### Yelp API notes
+1. business name -> business details [no - generic search w correct params]
+2. business details.id -> id search - might not need this [we dont]
+3. extract stars and review count [done]
+4. develop some sort of ranking [or just display stars? - done]
 
