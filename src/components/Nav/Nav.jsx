@@ -29,7 +29,7 @@ function Nav() {
 
       <AppBar
         position="static"
-        color="default"
+        color="primary"
         elevation={0}
         sx={{ borderBottom: (theme) => `1px solid ${theme.palette.divider}` }}
       >
@@ -64,7 +64,7 @@ function Nav() {
                 <>
                   <Link
                     variant="button"
-                    color="text.primary"
+                    color="inherit"
                     href="/#display"
                     sx={{ my: 1, mx: 1.5 }}
                   >
@@ -72,7 +72,7 @@ function Nav() {
                   </Link>
                   <Link
                     variant="button"
-                    color="text.primary"
+                    color="inherit"
                     href="/#entry"
                     sx={{ my: 1, mx: 1.5 }}
                   >
@@ -80,7 +80,7 @@ function Nav() {
                   </Link>
                   <Link
                     variant="button"
-                    color="text.primary"
+                    color="inherit"
                     href="/#favorites"
                     sx={{ my: 1, mx: 1.5 }}
                   >

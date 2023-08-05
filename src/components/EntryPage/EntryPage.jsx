@@ -160,6 +160,7 @@ function EntryPage() {
                 })
               : null}
             <Button
+              color="success"
               fullWidth
               variant="contained"
               sx={{ mt: 2, mb: 1 }}
@@ -169,6 +170,7 @@ function EntryPage() {
             </Button>
             <center>
               <Button
+                color="error"
                 onClick={handleCancel}
                 variant="contained"
                 sx={{ mb: 2, width: "18em" }}

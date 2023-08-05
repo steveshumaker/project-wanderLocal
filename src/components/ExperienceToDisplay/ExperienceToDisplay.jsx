@@ -96,8 +96,15 @@ function ExperienceToDisplay({ experience }) {
                 });
               }}
             />
-            <Button onClick={() => sendUpdate(experience.this_id)}>Save</Button>
-            <Button onClick={() => setEditingId(null)}>Cancel</Button>
+            <Button
+              color="success"
+              onClick={() => sendUpdate(experience.this_id)}
+            >
+              Save
+            </Button>
+            <Button color="warning" onClick={() => setEditingId(null)}>
+              Cancel
+            </Button>
           </CardContent>
         </Card>
       ) : (
@@ -169,6 +176,7 @@ function ExperienceToDisplay({ experience }) {
               Edit
             </Button>
             <Button
+              color="error"
               onClick={() => handleDeleteClick(experience.this_id)}
               size="small"
             >
