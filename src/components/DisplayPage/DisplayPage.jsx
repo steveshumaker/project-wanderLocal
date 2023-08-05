@@ -62,6 +62,7 @@ function DisplayPage() {
                   <ExperienceToDisplay
                     key={experience.this_id}
                     experience={experience}
+                    userId={user.id}
                   />
                 </Grid>
               );
