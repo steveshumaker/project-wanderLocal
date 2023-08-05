@@ -50,7 +50,7 @@ function DisplayPage() {
               color="text.secondary"
               paragraph
             >
-              click ❤️ to favorite
+              ❤️ to favorite!
             </Typography>
           </Container>
         </Box>

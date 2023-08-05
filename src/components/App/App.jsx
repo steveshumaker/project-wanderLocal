@@ -138,7 +138,7 @@ function App() {
                 <Redirect to="/display" />
               ) : (
                 // Otherwise, show the Landing page
-                <LandingPage />
+                <RegisterPage />
               )}
             </Route>
 

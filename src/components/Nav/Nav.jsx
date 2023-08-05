@@ -34,18 +34,26 @@ function Nav() {
         sx={{ borderBottom: (theme) => `1px solid ${theme.palette.divider}` }}
       >
         <Toolbar sx={{ flexWrap: "wrap" }}>
-          <Typography variant="h6" color="inherit" noWrap sx={{ flexGrow: 1 }}>
+          <Typography
+            variant="h6"
+            component="a"
+            color="inherit"
+            noWrap
+            sx={{ flexGrow: 1, textDecoration: "none" }}
+            href="/"
+          >
             wanderLocal
-            <Link
-              onClick={() => {
-                dispatch({ type: "FETCH_ALL_EXPERIENCES" });
-              }}
-              color="text.primary"
-              href="/#search"
-              sx={{ my: 1, mx: 1.5 }}
-            >
-              🔎
-            </Link>
+          </Typography>
+          <Typography
+            component="a"
+            onClick={() => {
+              dispatch({ type: "FETCH_ALL_EXPERIENCES" });
+            }}
+            color="text.primary"
+            href="/#search"
+            sx={{ my: 1, mx: 1.5, textDecoration: "none" }}
+          >
+            🔎
           </Typography>
 
           <nav>
@@ -53,7 +61,7 @@ function Nav() {
               {!user.id && (
                 <Link
                   variant="button"
-                  color="text.primary"
+                  color="inherit"
                   href="/#login"
                   sx={{ my: 1, mx: 1.5 }}
                 >
@@ -66,7 +74,7 @@ function Nav() {
                     variant="button"
                     color="inherit"
                     href="/#display"
-                    sx={{ my: 1, mx: 1.5 }}
+                    sx={{ my: 1, mx: 1.5, textDecoration: "none" }}
                   >
                     Home
                   </Link>
@@ -74,7 +82,7 @@ function Nav() {
                     variant="button"
                     color="inherit"
                     href="/#entry"
-                    sx={{ my: 1, mx: 1.5 }}
+                    sx={{ my: 1, mx: 1.5, textDecoration: "none" }}
                   >
                     Add
                   </Link>
@@ -82,7 +90,7 @@ function Nav() {
                     variant="button"
                     color="inherit"
                     href="/#favorites"
-                    sx={{ my: 1, mx: 1.5 }}
+                    sx={{ my: 1, mx: 1.5, textDecoration: "none" }}
                   >
                     ❤️
                   </Link>

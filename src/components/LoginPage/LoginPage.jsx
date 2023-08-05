@@ -15,7 +15,7 @@ function LoginPage() {
         <Button
           type="button"
           variant="contained"
-          sx={{ mt: 3, mb: 2, width:"12em" }}
+          sx={{ mt: 3, mb: 2, width: "12em" }}
           onClick={() => {
             history.push("/registration");
           }}

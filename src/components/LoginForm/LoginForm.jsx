@@ -73,12 +73,12 @@ function LoginForm() {
           </div>
           <div>
             <TextField
+              type="password"
               margin="normal"
               required
               fullWidth
               id="password"
               label="Password"
-              name="password"
               autoComplete="current-password"
               value={password}
               onChange={(event) => setPassword(event.target.value)}
@@ -86,6 +86,7 @@ function LoginForm() {
           </div>
           <div>
             <Button
+              color="success"
               type="submit"
               fullWidth
               variant="contained"
