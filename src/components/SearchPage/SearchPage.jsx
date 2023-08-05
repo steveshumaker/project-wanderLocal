@@ -16,9 +16,16 @@ import Grid from "@mui/material/Grid";
 import Chip from "@mui/material/Chip";
 
 function SearchPage() {
+  // STATE
+  // Access experiences from store
   const experiences = useSelector((store) => store.experience);
-  const [tagList, setTagList] = useState([]);
+  // Search state
   const [search, setSearch] = useState([]);
+
+  // DRAWER/TAGS START
+  // Tags state
+  const [tagList, setTagList] = useState([]);
+  // Drawer state
   const [state, setState] = useState({
     top: false,
     left: false,
@@ -26,17 +33,11 @@ function SearchPage() {
     right: false,
   });
 
-  useEffect(() => {
-    experiences.map((experience) => {
-      if (experience.tags !== null) {
-        setTagList((oldTags) => [...oldTags, experience.tags]);
-      }
-    });
-  }, []);
-
+  // Tags array manipulation - flatten and remove dupes
   const flatTags = tagList.flat();
   const finalTags = [...new Set(flatTags)];
 
+  // Drawer keypress handling
   const toggleDrawer = (anchor, open) => (event) => {
     if (
       event.type === "keydown" &&
@@ -44,10 +45,10 @@ function SearchPage() {
     ) {
       return;
     }
-
     setState({ ...state, [anchor]: open });
   };
 
+  // Drawer list item population
   const list = (anchor) => (
     <Box
       sx={{ width: anchor === "top" || anchor === "bottom" ? "auto" : 250 }}
@@ -67,8 +68,25 @@ function SearchPage() {
     </Box>
   );
 
+  // --- GENERIC SEARCH ---
+
+
+  // Page useEffect:
+  // - On comp load:
+  // - - for tags: create 2d tags array
+  // - - for search: TODO
+  useEffect(() => {
+    // tags functionality
+    experiences.map((experience) => {
+      if (experience.tags !== null) {
+        setTagList((oldTags) => [...oldTags, experience.tags]);
+      }
+    });
+  }, []);
+
   return (
     <div>
+      {/* DRAWER COMPONENT */}
       {/* {finalTags.map((tag) => {
         return <span>{tag} </span>;
       })}
@@ -84,6 +102,12 @@ function SearchPage() {
             {list("left")}
           </Drawer>
         </Fragment>
+      </div>
+      {/* END DRAWER COMPONENT */}
+
+      {/* ITEM DISPLAY */}
+      <div>
+        
       </div>
       <div>
         <CssBaseline />
@@ -123,6 +147,7 @@ function SearchPage() {
           </Container>
         </main>
       </div>
+      {/* END ITEM DISPLAY */}
     </div>
   );
 }

@@ -4,11 +4,11 @@
 ## TODO
 
 
-- move populate experiences dispatch to the onclick of a succesful login
+- move populate experiences dispatch to the onclick of a succesful login [like it where it is]
 - refactor GET route for favorites query into one route that conditionally queries
 - - the way I see it, favorites can either be a new route/saga/store combo, or add a table to experiences and update queries to POST favorite and GET favorites
 - basic styling [ok]
-- filter-able 'view' page
+- filter-able 'view' page [search page AND/OR list page?]
 - I think making 'info' into a non-protected route that lists a collage of experiences by location could be cool [priority]
 - remove unneeded components
 
@@ -31,10 +31,11 @@ add tags to database [done]
 - modify post to add an array [need to modify experiences]
 
 display all items
-- get all items on page load
-- init search bar and search state
+- get all items on page load [done]
+- init search bar and search state [done]
+- LET'S HOLD OFF ON THE TAGS AND JUST IMPLEMENT SEARCH
 - user can add a search tag [future - click on search tag to add]
-- - commans and spaces rule applies
+- - commas and spaces rule applies
 - while the search state is not empty:
 - - display the tags at the top
 - - filter the experiences for those that include tags
