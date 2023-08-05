@@ -1,4 +1,4 @@
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
 //MUI
 import AppBar from "@mui/material/AppBar";
@@ -13,10 +13,12 @@ import Link from "@mui/material/Link";
 import Input from "@mui/material/Input";
 import Chip from "@mui/material/Chip";
 
-function ExperienceToDisplay({ experience }) {
+function ExperienceToDisplay({ experience, userId }) {
   // local states for editing
   const [editToSend, setEditToSend] = useState({});
   const [editingId, setEditingId] = useState(null);
+
+  const user = useSelector((store) => store.user);
 
   // init dispatch
   const dispatch = useDispatch();
@@ -165,24 +167,26 @@ function ExperienceToDisplay({ experience }) {
                 })
               : null}
           </CardContent>
-          <CardActions>
-            <Button
-              onClick={() => handleFavoriteClick(experience)}
-              size="small"
-            >
-              ❤️
-            </Button>
-            <Button onClick={() => handleEditClick(experience)} size="small">
-              Edit
-            </Button>
-            <Button
-              color="error"
-              onClick={() => handleDeleteClick(experience.this_id)}
-              size="small"
-            >
-              Delete
-            </Button>
-          </CardActions>
+          {experience.user_id === user.id ? (
+            <CardActions>
+              <Button
+                onClick={() => handleFavoriteClick(experience)}
+                size="small"
+              >
+                ❤️
+              </Button>
+              <Button onClick={() => handleEditClick(experience)} size="small">
+                Edit
+              </Button>
+              <Button
+                color="error"
+                onClick={() => handleDeleteClick(experience.this_id)}
+                size="small"
+              >
+                Delete
+              </Button>
+            </CardActions>
+          ) : null}
         </Card>
       )}
     </div>
