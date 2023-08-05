@@ -18,7 +18,6 @@ import { Link } from "@mui/material";
 
 function Nav() {
   const user = useSelector((store) => store.user);
-  const history = useHistory();
   const dispatch = useDispatch();
 
   return (

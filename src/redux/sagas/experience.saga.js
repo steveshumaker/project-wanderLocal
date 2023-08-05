@@ -13,19 +13,6 @@ function* fetchExperiences() {
   }
 }
 
-function* fetchAllExperiences() {
-  try {
-    const response = yield fetch("/api/experience/all");
-    if (!response.ok) {
-      throw new Error("Network response for GET was not OK");
-    }
-    const experiences = yield response.json();
-    yield put({ type: "SET_ALL_EXPERIENCES", payload: experiences });
-  } catch (error) {
-    console.log("Experience get request failed", error);
-  }
-}
-
 function* addExperience(action) {
   try {
     const response = yield fetch("/api/experience", {
@@ -93,7 +80,6 @@ function* deleteExperience(action) {
 
 function* experienceSaga() {
   yield takeEvery("FETCH_USER_EXPERIENCE", fetchExperiences),
-    yield takeEvery("FETCH_ALL_EXPERIENCES", fetchAllExperiences),
     yield takeEvery("ADD_USER_EXPERIENCE", addExperience),
     yield takeEvery("UPDATE_EXPERIENCE", updateExperience),
     yield takeEvery("DELETE_EXPERIENCE", deleteExperience);

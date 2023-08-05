@@ -1,5 +1,6 @@
 import { useState, useEffect, Fragment } from "react";
 import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import ExperienceToDisplay from "../ExperienceToDisplay/ExperienceToDisplay";
 // MUI
 import Box from "@mui/material/Box";
@@ -7,21 +8,24 @@ import { CssBaseline } from "@mui/material";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
-import Chip from "@mui/material/Chip";
 import Autocomplete from "@mui/material/Autocomplete";
 import TextField from "@mui/material/TextField";
 
 function SearchPage() {
+  const dispatch = useDispatch();
   // STATE
 
   // Access experiences from store
-  const experiences = useSelector((store) => store.experience);
+  const experiences = useSelector((store) => store.search);
 
   // Search state
   const [search, setSearch] = useState([]);
 
   // Tags state
   const [tagList, setTagList] = useState([]);
+
+  // Render state
+  const [shouldRender, setShouldRender] = useState(false);
 
   // Tags array manipulation - flatten and remove dupes
   const flatTags = tagList.flat();
@@ -37,13 +41,22 @@ function SearchPage() {
   // - - for tags: create 2d tags array
   // - - for search: TODO
   useEffect(() => {
-    // tags functionality
-    experiences.map((experience) => {
-      if (experience.tags !== null) {
-        setTagList((oldTags) => [...oldTags, experience.tags]);
-      }
-    });
+    console.log("PAGE LOADED");
+    // Set the tag list on page load
+    // dispatch({ type: "FETCH_ALL_EXPERIENCES" });
+    if (experiences.length > 0) {
+      experiences.map((experience) => {
+        if (experience.tags !== null) {
+          setTagList((oldTags) => [...oldTags, experience.tags]);
+        }
+      });
+    }
+    setShouldRender(true);
   }, []);
+
+  if (!shouldRender) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <div>
@@ -84,20 +97,49 @@ function SearchPage() {
               />
             </Container>
           </Box>
-          <Container sx={{ py: 1 }} maxWidth="md">
-            <Grid container spacing={4}>
-              {experiences.map((experience) => {
-                return (
-                  <Grid item key={experience.this_id} xs={18} sm={9} md={6}>
-                    <ExperienceToDisplay
-                      key={experience.this_id}
-                      experience={experience}
-                    />
-                  </Grid>
-                );
-              })}
-            </Grid>
-          </Container>
+          {search.length === 0 ? (
+            <Container sx={{ py: 1 }} maxWidth="md">
+              <Grid container spacing={4}>
+                {experiences.map((experience) => {
+                  return (
+                    <Grid item key={experience.this_id} xs={18} sm={9} md={6}>
+                      <ExperienceToDisplay
+                        key={experience.this_id}
+                        experience={experience}
+                      />
+                    </Grid>
+                  );
+                })}
+              </Grid>
+            </Container>
+          ) : (
+            <Container sx={{ py: 1 }} maxWidth="md">
+              <Grid container spacing={4}>
+                {experiences.map((experience) => {
+                  for (let searchTerm of search) {
+                    if (experience.tags) {
+                      if (experience.tags.includes(searchTerm)) {
+                        return (
+                          <Grid
+                            item
+                            key={experience.this_id}
+                            xs={18}
+                            sm={9}
+                            md={6}
+                          >
+                            <ExperienceToDisplay
+                              key={experience.this_id}
+                              experience={experience}
+                            />
+                          </Grid>
+                        );
+                      }
+                    }
+                  }
+                })}
+              </Grid>
+            </Container>
+          )}
         </main>
       </div>
       {/* END ITEM DISPLAY */}

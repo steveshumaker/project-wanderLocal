@@ -25,7 +25,7 @@ router.get("/", rejectUnauthenticated, (req, res) => {
 });
 
 // get ALL experiences (search page)
-router.get("/all", rejectUnauthenticated, (req, res) => {
+router.get("/all", (req, res) => {
   const QUERY = `SELECT *, experiences.id AS this_id FROM experiences
   ORDER BY experiences.id;`;
 
