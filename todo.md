@@ -9,9 +9,13 @@
 - - *more* styling
 - filter-able 'view' page [search page AND/OR list page?] [done!][have some todos below]
 - I think making 'info' into a non-protected route that lists a collage of experiences by location could be cool [this would be nice]
+- image upload
+- tooltip for tags
 - remove unneeded components
 - for display: should we have location headers?
 - Info/about page
+- comment everything
+
 
 
 
@@ -36,9 +40,7 @@ add tags to database [done]
 display all items
 - get all items on page load [done]
 - init search bar and search state [done]
-- LET'S HOLD OFF ON THE TAGS AND JUST IMPLEMENT SEARCH
-- user can add a search tag [future - click on search tag to add]
-- - commas and spaces rule applies
+- user can search and click on search tag to add
 - while the search state is not empty:
 - - display the tags at the top
 - - filter the experiences for those that include tags
