@@ -31,9 +31,21 @@ function RegisterForm() {
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
+      <Typography
+        sx={{
+          marginTop: 4,
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+        }}
+        component="h1"
+        variant="h4"
+      >
+        register.
+      </Typography>
       <Box
         sx={{
-          marginTop: 8,
+          marginTop: 4,
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
@@ -44,9 +56,8 @@ function RegisterForm() {
         <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
           <LockOutlinedIcon />
         </Avatar>
-        <Typography component="h1" variant="h5">
-          Register
-        </Typography>
+
+        <Typography component="p">join the community!</Typography>
         <Box component="form" noValidate sx={{ mt: 1 }} onSubmit={registerUser}>
           {errors.registrationMessage && (
             <Typography component="h3" className="alert" role="alert">
@@ -58,7 +69,6 @@ function RegisterForm() {
               margin="normal"
               required
               fullWidth
-              name="username"
               label="Username"
               autoFocus
               value={username}
@@ -67,10 +77,10 @@ function RegisterForm() {
           </div>
           <div>
             <TextField
+              type="password"
               margin="normal"
               required
               fullWidth
-              name="password"
               label="Password"
               value={password}
               onChange={(event) => setPassword(event.target.value)}
@@ -78,6 +88,7 @@ function RegisterForm() {
           </div>
           <div>
             <Button
+              color="success"
               type="submit"
               name="submit"
               fullWidth
