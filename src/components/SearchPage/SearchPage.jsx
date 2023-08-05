@@ -3,73 +3,34 @@ import { useSelector } from "react-redux";
 import ExperienceToDisplay from "../ExperienceToDisplay/ExperienceToDisplay";
 // MUI
 import Box from "@mui/material/Box";
-import Drawer from "@mui/material/Drawer";
-import Button from "@mui/material/Button";
-import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
-import ListItemButton from "@mui/material/ListItemButton";
-import ListItemText from "@mui/material/ListItemText";
 import { CssBaseline } from "@mui/material";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
 import Chip from "@mui/material/Chip";
+import Autocomplete from "@mui/material/Autocomplete";
+import TextField from "@mui/material/TextField";
 
 function SearchPage() {
   // STATE
+
   // Access experiences from store
   const experiences = useSelector((store) => store.experience);
+
   // Search state
   const [search, setSearch] = useState([]);
 
-  // DRAWER/TAGS START
   // Tags state
   const [tagList, setTagList] = useState([]);
-  // Drawer state
-  const [state, setState] = useState({
-    top: false,
-    left: false,
-    bottom: false,
-    right: false,
-  });
 
   // Tags array manipulation - flatten and remove dupes
   const flatTags = tagList.flat();
   const finalTags = [...new Set(flatTags)];
 
-  // Drawer keypress handling
-  const toggleDrawer = (anchor, open) => (event) => {
-    if (
-      event.type === "keydown" &&
-      (event.key === "Tab" || event.key === "Shift")
-    ) {
-      return;
-    }
-    setState({ ...state, [anchor]: open });
+  // Handling tag search
+  const handleTagsChange = (event, newValue) => {
+    setSearch(newValue);
   };
-
-  // Drawer list item population
-  const list = (anchor) => (
-    <Box
-      sx={{ width: anchor === "top" || anchor === "bottom" ? "auto" : 250 }}
-      role="presentation"
-      onClick={toggleDrawer(anchor, false)}
-      onKeyDown={toggleDrawer(anchor, false)}
-    >
-      <List>
-        {finalTags.map((text, index) => (
-          <ListItem key={text} disablePadding>
-            <ListItemButton>
-              <ListItemText primary={text} />
-            </ListItemButton>
-          </ListItem>
-        ))}
-      </List>
-    </Box>
-  );
-
-  // --- GENERIC SEARCH ---
-
 
   // Page useEffect:
   // - On comp load:
@@ -86,29 +47,8 @@ function SearchPage() {
 
   return (
     <div>
-      {/* DRAWER COMPONENT */}
-      {/* {finalTags.map((tag) => {
-        return <span>{tag} </span>;
-      })}
-      <input type="text" /> */}
-      <div>
-        <Fragment key={"left"}>
-          <Button onClick={toggleDrawer("left", true)}>Left</Button>
-          <Drawer
-            anchor="left"
-            open={state["left"]}
-            onClose={toggleDrawer("left", false)}
-          >
-            {list("left")}
-          </Drawer>
-        </Fragment>
-      </div>
-      {/* END DRAWER COMPONENT */}
-
       {/* ITEM DISPLAY */}
-      <div>
-        
-      </div>
+
       <div>
         <CssBaseline />
         <main>
@@ -129,6 +69,19 @@ function SearchPage() {
               >
                 experiences.
               </Typography>
+              <Autocomplete
+                sx={{ width: "500px" }}
+                multiple
+                id="tags-outlined"
+                options={finalTags}
+                getOptionLabel={(tag) => tag}
+                filterSelectedOptions
+                value={search}
+                onChange={handleTagsChange}
+                renderInput={(params) => (
+                  <TextField {...params} label="search." placeholder="tags." />
+                )}
+              />
             </Container>
           </Box>
           <Container sx={{ py: 1 }} maxWidth="md">
