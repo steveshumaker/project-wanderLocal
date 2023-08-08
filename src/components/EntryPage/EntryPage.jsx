@@ -9,6 +9,7 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import Chip from "@mui/material/Chip";
+import Input from "@mui/material/Input";
 
 // store
 
@@ -129,19 +130,17 @@ function EntryPage() {
               id="webPathIn"
               type="text"
             />
-            <TextField
-              margin="normal"
-              fullWidth
+            <Input
               label="pics."
-              value={experienceToSend.photo_path}
+              // value={experienceToSend.photo_path}
+              type="file"
               onChange={(e) => {
                 setExperienceToSend({
                   ...experienceToSend,
-                  photo_path: e.target.value,
+                  photo_path: URL.createObjectURL(e.target.files[0]),
                 });
               }}
               id="photoPathIn"
-              type="text"
             />
             <TextField
               margin="normal"
