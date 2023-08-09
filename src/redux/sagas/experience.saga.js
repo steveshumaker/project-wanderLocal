@@ -26,7 +26,7 @@ function* addExperience(action) {
     if (!response.ok) {
       throw new Error("Network response for POST was not OK");
     }
-    // -------------- COMMENTED OUT FOR LIMITING RATE LIMIT ERRORS ---------------
+    // -------------- COMMENT TO LIMIT YELP API FETCHES ---------------
     yield put({
       type: "FETCH_EXTERNAL_DATA",
       payload: {

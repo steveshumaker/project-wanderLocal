@@ -41,7 +41,7 @@ function EntryPage() {
   const sendExperience = async (e) => {
     e.preventDefault();
 
-    // send the photo to S3 as a formData object 
+    // send the photo to S3 as a formData object
     // if no selected file, send a null formData
     const formData = new FormData();
     if (selectedFile !== undefined) {
@@ -183,6 +183,14 @@ function EntryPage() {
               id="descIn"
               type="text"
             />
+            <Input
+              onMouseEnter={() => console.log("test")}
+              placeholder="test"
+              label="pics."
+              type="file"
+              onChange={onFileChange}
+              id="photoPathIn"
+            />
             <TextField
               margin="normal"
               fullWidth
@@ -196,12 +204,6 @@ function EntryPage() {
               }}
               id="webPathIn"
               type="text"
-            />
-            <Input
-              label="pics."
-              type="file"
-              onChange={onFileChange}
-              id="photoPathIn"
             />
             <TextField
               margin="normal"

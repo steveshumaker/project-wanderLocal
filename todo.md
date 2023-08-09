@@ -9,7 +9,7 @@
 - - *more* styling
 - filter-able 'view' page [search page AND/OR list page?] [done!][have some todos below]
 - I think making 'info' into a non-protected route that lists a collage of experiences by location could be cool [this would be nice]
-- image upload
+- image upload [done]
 - tooltip for tags
 - remove unneeded components
 - for display: should we have location headers?
@@ -55,7 +55,7 @@ display all items
 3. extract stars and review count [done]
 4. develop some sort of ranking [or just display stars? - done]
 
-## Image entry
+## Image entry [done]
 potentially add another field in database to store web versus 
 - on add, store the image in S3
 - then, query yelp
