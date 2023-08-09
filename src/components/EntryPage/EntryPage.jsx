@@ -33,23 +33,28 @@ function EntryPage() {
     location_desc: "",
     web_path: "",
     exp_tags: [],
-    user_id: "",
+    photo_path: "",
   });
 
-  const sendExperience = (e) => {
+  const sendExperience = async (e) => {
     e.preventDefault();
+    // send the photo to S3
     const formData = new FormData();
     formData.append("image", selectedFile);
-    const updatedExperience = {
-      ...experienceToSend,
-      exp_tags: tags,
-    };
-    setExperienceToSend(updatedExperience);
-    dispatch({ type: "ADD_USER_EXPERIENCE", payload: updatedExperience });
-    fetch("/api/upload", {
+    const response = await fetch("/api/upload", {
       method: "POST",
       body: formData,
     });
+    // receive the md5 (also the filename)
+    const responseData = await response.json();
+    const updatedExperience = {
+      ...experienceToSend,
+      exp_tags: tags,
+      photo_path: responseData,
+    };
+    setExperienceToSend(updatedExperience);
+    // dispatch action to add experience
+    dispatch({ type: "ADD_USER_EXPERIENCE", payload: updatedExperience });
     history.push("/display");
   };
 

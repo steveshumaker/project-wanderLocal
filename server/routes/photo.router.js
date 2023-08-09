@@ -31,7 +31,9 @@ router.post("/", rejectUnauthenticated, (req, res) => {
     Body: imageData, // image data to upload
   });
 
-  s3Client.send(command);
+  s3Client.send(command).then((response) => {
+    res.json(hash).status(200);
+  });
 });
 
 module.exports = router;

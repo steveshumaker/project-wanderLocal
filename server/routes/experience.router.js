@@ -48,13 +48,14 @@ router.post("/", rejectUnauthenticated, (req, res) => {
     web_path,
     location_desc,
     exp_tags,
+    photo_path,
   } = req.body;
   const user_id = req.user.id;
 
 
   const QUERY = `INSERT INTO experiences
-  (name, description, web_path, user_id, location_desc, tags)
-  VALUES ($1, $2, $3, $4, $5, $6) RETURNING id;`;
+  (name, description, web_path, user_id, location_desc, tags, photo_path)
+  VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING id;`;
 
 
   pool
@@ -65,6 +66,7 @@ router.post("/", rejectUnauthenticated, (req, res) => {
       user_id,
       location_desc,
       exp_tags,
+      photo_path
     ])
     .then((result) => {
       const createdId = result.rows[0].id;
