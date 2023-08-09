@@ -3,7 +3,7 @@
 
 ## TODO
 - move populate experiences dispatch to the onclick of a succesful login [like it where it is]
-- refactor GET route for favorites query into one route that conditionally queries [this would fix the refresh issue]
+- refactor GET route for favorites query into one route that conditionally queries [this would fix the refresh issue] [done; no refresh issue]
 - - the way I see it, favorites can either be a new route/saga/store combo, or add a table to experiences and update queries to POST favorite and GET favorites
 - basic styling [ok]
 - - *more* styling

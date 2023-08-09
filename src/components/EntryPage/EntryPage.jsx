@@ -183,13 +183,14 @@ function EntryPage() {
               id="descIn"
               type="text"
             />
-            <Input
+            <TextField
+              fullWidth
               onMouseEnter={() => console.log("test")}
-              placeholder="test"
-              label="pics."
               type="file"
               onChange={onFileChange}
               id="photoPathIn"
+              label="pic."
+              InputLabelProps={{ shrink: true }}
             />
             <TextField
               margin="normal"
