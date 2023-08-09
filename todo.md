@@ -9,12 +9,14 @@
 - - *more* styling
 - filter-able 'view' page [search page AND/OR list page?] [done!][have some todos below]
 - I think making 'info' into a non-protected route that lists a collage of experiences by location could be cool [this would be nice]
-- image upload
+- image upload [done]
 - tooltip for tags
 - remove unneeded components
 - for display: should we have location headers?
 - Info/about page
 - comment everything
+- tooltip for tag entry ('seperate by space, etc') AND tooltip for location (needed for yelp currently)
+- alert user after submitting, would smooth out async flow especially when submitting their own pic
 
 
 
@@ -52,4 +54,28 @@ display all items
 2. business details.id -> id search - might not need this [we dont]
 3. extract stars and review count [done]
 4. develop some sort of ranking [or just display stars? - done]
+
+## Image entry [done]
+potentially add another field in database to store web versus 
+- on add, store the image in S3
+- then, query yelp
+- if no image added:
+  - if no image returned: blank
+  - else if image returned: image
+- else if image added:
+  - use that image for the banner
+
+# FLOWS #
+- user navigates to add page
+- adds an experience and clicks submit
+-> personal image ? upload to S3 (direct fetch to router), POST route sends back MD5 : POST route sends back null
+-> update the experience with personal photo path
+-> dispatch add experience saga
+-> add experience saga POSTs to experience route
+-> POST returns experience ID
+-> saga PUTs fetch external data saga
+-> fetch external data saga queries yelp API using name and location
+-> calls the update experience saga, which sends a PUT request to the experience router
+
+
 

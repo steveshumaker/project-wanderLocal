@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
+import { readAndCompressImage } from "browser-image-resizer";
 // MUI
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -9,37 +10,69 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import Chip from "@mui/material/Chip";
+import Input from "@mui/material/Input";
 
 // store
 
 function EntryPage() {
   const history = useHistory();
   const dispatch = useDispatch();
-  const user = useSelector((store) => store.user);
+  // const user = useSelector((store) => store.user);
 
+  // Selected image file name
+  const [fileName, setFileName] = useState("");
+  // Selected file type
+  const [fileType, setFileType] = useState("");
+  // Selected image file
+  const [selectedFile, setSelectedFile] = useState();
+  // tags state
   const [tags, setTags] = useState([]);
+  // overall experience state
   const [experienceToSend, setExperienceToSend] = useState({
     exp_name: "",
     description: "",
     location_desc: "",
     web_path: "",
-    photo_path: "",
     exp_tags: [],
-    user_id: "",
+    photo_path: "",
   });
 
-  const sendExperience = (e) => {
+  // submit button handling
+  const sendExperience = async (e) => {
     e.preventDefault();
+
+    // send the photo to S3 as a formData object
+    // if no selected file, send a null formData
+    const formData = new FormData();
+    if (selectedFile !== undefined) {
+      formData.append("image", selectedFile);
+    } else {
+      formData.append("image", null);
+    }
+    const response = await fetch("/api/upload", {
+      method: "POST",
+      body: formData,
+    });
+    // receive the md5 (also the filename)
+    const responseData = await response.json();
+
+    // update the payload to include the photopath (md5)
     const updatedExperience = {
       ...experienceToSend,
-      user_id: user.id,
+      photo_path: responseData,
       exp_tags: tags,
     };
+
+    // update the state of the sent experience
     setExperienceToSend(updatedExperience);
+
+    // dispatch action to add experience
     dispatch({ type: "ADD_USER_EXPERIENCE", payload: updatedExperience });
     history.push("/display");
   };
 
+  // function that handles adding a tag to the tag state
+  // TODO - add tooltip to tell user to separate by spacebar
   const handleKeyPress = (e) => {
     if (e.key === "," || e.key === " ") {
       // handle the comma persisting
@@ -50,6 +83,41 @@ function EntryPage() {
 
   const handleCancel = () => {
     history.push("/display");
+  };
+
+  // handle photo file change
+  const onFileChange = async (event) => {
+    // Access the selected file
+    const fileToUpload = event.target.files[0];
+
+    // Resize and compress the image. Remove this if using something other
+    // than an image upload.
+    const copyFile = new Blob([fileToUpload], {
+      type: fileToUpload.type,
+      name: fileToUpload.name,
+    });
+    const resizedFile = await readAndCompressImage(copyFile, {
+      quality: 1.0, // 100% quality
+      maxHeight: 1000, // max height of the image
+    });
+
+    // Limit to specific file types.
+    const acceptedImageTypes = ["image/gif", "image/jpeg", "image/png"];
+
+    // Check if the file is one of the allowed types.
+    if (acceptedImageTypes.includes(fileToUpload.type)) {
+      // Resizing the image removes the name, store it in a separate variable
+      setFileName(encodeURIComponent(fileToUpload.name));
+      setFileType(encodeURIComponent(fileToUpload.type));
+      // Save the resized file
+      setSelectedFile(resizedFile);
+
+      // ------ TODO ----- image preview
+      // Create a URL that can be used in an img tag for previewing the image
+      // setImagePreview(URL.createObjectURL(resizedFile));
+    } else {
+      alert("Please select an image");
+    }
   };
 
   return (
@@ -115,6 +183,14 @@ function EntryPage() {
               id="descIn"
               type="text"
             />
+            <Input
+              onMouseEnter={() => console.log("test")}
+              placeholder="test"
+              label="pics."
+              type="file"
+              onChange={onFileChange}
+              id="photoPathIn"
+            />
             <TextField
               margin="normal"
               fullWidth
@@ -127,20 +203,6 @@ function EntryPage() {
                 });
               }}
               id="webPathIn"
-              type="text"
-            />
-            <TextField
-              margin="normal"
-              fullWidth
-              label="pics."
-              value={experienceToSend.photo_path}
-              onChange={(e) => {
-                setExperienceToSend({
-                  ...experienceToSend,
-                  photo_path: e.target.value,
-                });
-              }}
-              id="photoPathIn"
               type="text"
             />
             <TextField

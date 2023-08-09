@@ -3,7 +3,6 @@ const {
   rejectUnauthenticated,
 } = require("../modules/authentication-middleware");
 const pool = require("../modules/pool");
-
 const router = express.Router();
 
 // get
@@ -42,34 +41,35 @@ router.get("/all", (req, res) => {
 
 // post
 router.post("/", rejectUnauthenticated, (req, res) => {
+  console.log("IN POST");
   const {
     exp_name,
     description,
     web_path,
-    photo_path,
     location_desc,
     exp_tags,
+    photo_path,
   } = req.body;
-  console.log(exp_tags);
   const user_id = req.user.id;
 
-  const QUERY = `INSERT INTO experiences 
-  (name, description, web_path, photo_path, user_id, location_desc, tags) 
+
+  const QUERY = `INSERT INTO experiences
+  (name, description, web_path, user_id, location_desc, tags, photo_path)
   VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING id;`;
+
 
   pool
     .query(QUERY, [
       exp_name,
       description,
       web_path,
-      photo_path,
       user_id,
       location_desc,
       exp_tags,
+      photo_path
     ])
     .then((result) => {
       const createdId = result.rows[0].id;
-      // res.send(response).status(201);
       res.status(201).json({ id: createdId });
     })
     .catch((error) => {
@@ -95,13 +95,13 @@ router.put("/", rejectUnauthenticated, (req, res) => {
         res.sendStatus(500);
       });
   } else if (req.body.stars) {
-    QUERY = `UPDATE experiences SET stars=$1, rating=$2, web_path=$3, photo_path=$4 WHERE id=$5;`;
+    QUERY = `UPDATE experiences SET stars=$1, rating=$2, web_path=$3, yelp_path=$4 WHERE id=$5;`;
     pool
       .query(QUERY, [
         req.body.stars,
         req.body.reviews,
         req.body.web_path,
-        req.body.photo_path,
+        req.body.yelp_path,
         req.body.dataId,
       ])
       .then((result) => res.sendStatus(200))

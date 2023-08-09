@@ -23,11 +23,10 @@ function* addExperience(action) {
       },
     });
     const newExpId = yield response.json();
-    // console.log("POST RESPONSE --> ", newExpId);
     if (!response.ok) {
       throw new Error("Network response for POST was not OK");
     }
-    // -------------- COMMENTED OUT FOR LIMITING RATE LIMIT ERRORS ---------------
+    // -------------- COMMENT TO LIMIT YELP API FETCHES ---------------
     yield put({
       type: "FETCH_EXTERNAL_DATA",
       payload: {
@@ -36,7 +35,7 @@ function* addExperience(action) {
         id: newExpId.id,
       },
     });
-    // yield put({ type: "FETCH_USER_EXPERIENCE" });
+    yield put({ type: "FETCH_USER_EXPERIENCE" });
   } catch (error) {
     console.log("Experience post failed: ", error);
   }

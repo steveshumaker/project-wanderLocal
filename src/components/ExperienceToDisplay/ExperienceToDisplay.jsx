@@ -73,7 +73,11 @@ function ExperienceToDisplay({ experience, userId }) {
               // 16:9
               pt: "56.25%",
             }}
-            image={experience.photo_path}
+            image={
+              experience.photo_path === null
+                ? experience.yelp_path
+                : `https://wanderlocal-images.s3.amazonaws.com/images/${user.id}/${experience.photo_path}`
+            }
           />
           <CardContent sx={{ flexGrow: 1 }}>
             <Typography>{experience.name}</Typography>
@@ -123,7 +127,11 @@ function ExperienceToDisplay({ experience, userId }) {
               // 16:9
               pt: "56.25%",
             }}
-            image={experience.photo_path}
+            image={
+              experience.photo_path === null
+                ? experience.yelp_path
+                : `https://wanderlocal-images.s3.amazonaws.com/images/${user.id}/${experience.photo_path}`
+            }
           />
           <CardContent sx={{ flexGrow: 1 }}>
             <Typography gutterBottom variant="h5" component="h2">
