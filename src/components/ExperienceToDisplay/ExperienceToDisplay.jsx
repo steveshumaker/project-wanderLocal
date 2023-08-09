@@ -148,7 +148,7 @@ function ExperienceToDisplay({ experience, userId }) {
             </Typography>
             <Typography>{experience.description} </Typography>
             <Typography>{experience.location_desc}</Typography>
-            {experience.user_id === user.id ? (
+            {/* {experience.user_id === user.id ? (
               <Stack direction="row" spacing={1} alignItems="center">
                 <Typography>hide.</Typography>
                 <FormControlLabel
@@ -162,7 +162,7 @@ function ExperienceToDisplay({ experience, userId }) {
                 />
                 <Typography>show.</Typography>
               </Stack>
-            ) : null}
+            ) : null} */}
             {experience.rating && checked ? (
               <Typography>Reviews: {experience.rating}</Typography>
             ) : null}

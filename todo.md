@@ -17,6 +17,7 @@
 - comment everything
 - tooltip for tag entry ('seperate by space, etc') AND tooltip for location (needed for yelp currently)
 - alert user after submitting, would smooth out async flow especially when submitting their own pic
+- toggle commented - experienceToDisplay - need to figure out how to store the toggle so that it persists
 
 
 
