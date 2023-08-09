@@ -84,7 +84,7 @@ function ExperienceToDisplay({ experience, userId }) {
             image={
               experience.photo_path === null
                 ? experience.yelp_path
-                : `https://wanderlocal-images.s3.amazonaws.com/images/${user.id}/${experience.photo_path}`
+                : experience.photo_path
             }
           />
           <CardContent sx={{ flexGrow: 1 }}>
@@ -138,7 +138,7 @@ function ExperienceToDisplay({ experience, userId }) {
             image={
               experience.photo_path === null
                 ? experience.yelp_path
-                : `https://wanderlocal-images.s3.amazonaws.com/images/${user.id}/${experience.photo_path}`
+                : experience.photo_path
             }
           />
           <CardContent sx={{ flexGrow: 1 }}>

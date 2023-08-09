@@ -17,7 +17,7 @@ import Input from "@mui/material/Input";
 function EntryPage() {
   const history = useHistory();
   const dispatch = useDispatch();
-  // const user = useSelector((store) => store.user);
+  const user = useSelector((store) => store.user);
 
   // Selected image file name
   const [fileName, setFileName] = useState("");
@@ -59,7 +59,7 @@ function EntryPage() {
     // update the payload to include the photopath (md5)
     const updatedExperience = {
       ...experienceToSend,
-      photo_path: responseData,
+      photo_path: `https://wanderlocal-images.s3.amazonaws.com/images/${user.id}/${responseData}`,
       exp_tags: tags,
     };
 
