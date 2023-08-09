@@ -3,7 +3,6 @@ const {
   rejectUnauthenticated,
 } = require("../modules/authentication-middleware");
 const pool = require("../modules/pool");
-
 const router = express.Router();
 
 // get
@@ -42,27 +41,27 @@ router.get("/all", (req, res) => {
 
 // post
 router.post("/", rejectUnauthenticated, (req, res) => {
+  console.log("IN POST");
   const {
     exp_name,
     description,
     web_path,
-    photo_path,
     location_desc,
     exp_tags,
   } = req.body;
-  console.log(exp_tags);
   const user_id = req.user.id;
 
-  const QUERY = `INSERT INTO experiences 
-  (name, description, web_path, photo_path, user_id, location_desc, tags) 
-  VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING id;`;
+
+  const QUERY = `INSERT INTO experiences
+  (name, description, web_path, user_id, location_desc, tags)
+  VALUES ($1, $2, $3, $4, $5, $6) RETURNING id;`;
+
 
   pool
     .query(QUERY, [
       exp_name,
       description,
       web_path,
-      photo_path,
       user_id,
       location_desc,
       exp_tags,

@@ -53,3 +53,18 @@ display all items
 3. extract stars and review count [done]
 4. develop some sort of ranking [or just display stars? - done]
 
+## Image entry
+potentially add another field in database to store web versus 
+- on add, store the image in S3
+- then, query yelp
+- if no image added:
+  - if no image returned: blank
+  - else if image returned: image
+- else if image added:
+  - use that image for the banner
+
+  add new route ('upload')
+  dispatch user experience
+  dispatch new saga action for image upload
+  dispatch yelp saga
+
