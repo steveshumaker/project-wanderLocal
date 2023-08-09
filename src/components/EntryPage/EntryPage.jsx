@@ -25,8 +25,9 @@ function EntryPage() {
   const [fileType, setFileType] = useState("");
   // Selected image file
   const [selectedFile, setSelectedFile] = useState();
-
+  // tags state
   const [tags, setTags] = useState([]);
+  // overall experience state
   const [experienceToSend, setExperienceToSend] = useState({
     exp_name: "",
     description: "",
@@ -36,18 +37,18 @@ function EntryPage() {
     photo_path: "",
   });
 
+  // submit button handling
   const sendExperience = async (e) => {
     e.preventDefault();
 
-    // send the photo to S3
-    // need to handle submission if no selected file
+    // send the photo to S3 as a formData object 
+    // if no selected file, send a null formData
     const formData = new FormData();
     if (selectedFile !== undefined) {
       formData.append("image", selectedFile);
     } else {
       formData.append("image", null);
     }
-    // formData.append("image", selectedFile);
     const response = await fetch("/api/upload", {
       method: "POST",
       body: formData,
@@ -55,22 +56,23 @@ function EntryPage() {
     // receive the md5 (also the filename)
     const responseData = await response.json();
 
+    // update the payload to include the photopath (md5)
     const updatedExperience = {
       ...experienceToSend,
       photo_path: responseData,
       exp_tags: tags,
     };
 
-    // const updatedExperience = {
-    //   ...experienceToSend,
-    //   exp_tags: tags,
-    // };
+    // update the state of the sent experience
     setExperienceToSend(updatedExperience);
+
     // dispatch action to add experience
     dispatch({ type: "ADD_USER_EXPERIENCE", payload: updatedExperience });
     history.push("/display");
   };
 
+  // function that handles adding a tag to the tag state
+  // TODO - add tooltip to tell user to separate by spacebar
   const handleKeyPress = (e) => {
     if (e.key === "," || e.key === " ") {
       // handle the comma persisting

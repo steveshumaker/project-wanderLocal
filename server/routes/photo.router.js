@@ -22,8 +22,11 @@ const s3Client = new S3Client({
 router.post("/", rejectUnauthenticated, (req, res) => {
   console.log("IN POST");
 
+  // if the file body is null (no photo provided)
   if (req.files === null) {
     res.json(null).status(200);
+
+    // if a photo is provided, process and upload it
   } else {
     const imageData = req.files.image.data;
     const hash = req.files.image.md5;
@@ -34,6 +37,7 @@ router.post("/", rejectUnauthenticated, (req, res) => {
       Body: imageData, // image data to upload
     });
 
+    // send back the md5 hash to store in the database
     s3Client.send(command).then((response) => {
       res.json(hash).status(200);
     });

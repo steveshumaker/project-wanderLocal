@@ -15,6 +15,8 @@
 - for display: should we have location headers?
 - Info/about page
 - comment everything
+- tooltip for tag entry ('seperate by space, etc') AND tooltip for location (needed for yelp currently)
+- alert user after submitting, would smooth out async flow especially when submitting their own pic
 
 
 
@@ -63,7 +65,17 @@ potentially add another field in database to store web versus
 - else if image added:
   - use that image for the banner
 
-implement the yelp/image logic
-implement get route to fetch from correct S3 bucket
-display the picture somewhere
+# FLOWS #
+- user navigates to add page
+- adds an experience and clicks submit
+-> personal image ? upload to S3 (direct fetch to router), POST route sends back MD5 : POST route sends back null
+-> update the experience with personal photo path
+-> dispatch add experience saga
+-> add experience saga POSTs to experience route
+-> POST returns experience ID
+-> saga PUTs fetch external data saga
+-> fetch external data saga queries yelp API using name and location
+-> calls the update experience saga, which sends a PUT request to the experience router
+
+
 
