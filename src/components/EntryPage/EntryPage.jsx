@@ -39,6 +39,7 @@ function EntryPage() {
   const sendExperience = async (e) => {
     e.preventDefault();
     // send the photo to S3
+    // need to handle submission if no selected file
     const formData = new FormData();
     formData.append("image", selectedFile);
     const response = await fetch("/api/upload", {
