@@ -81,6 +81,7 @@ router.post("/", rejectUnauthenticated, (req, res) => {
 // update TODO - this looks like it can be cleaned up
 router.put("/", rejectUnauthenticated, (req, res) => {
   let QUERY = "";
+  // if this is a favorites toggle
   if (
     req.body.favorite === true ||
     (req.body.favorite === false && !req.body.stars)
@@ -94,6 +95,7 @@ router.put("/", rejectUnauthenticated, (req, res) => {
         console.error(error);
         res.sendStatus(500);
       });
+      // if this is the external data update from the add experience saga
   } else if (req.body.stars) {
     QUERY = `UPDATE experiences SET stars=$1, rating=$2, web_path=$3, yelp_path=$4 WHERE id=$5;`;
     pool
@@ -109,6 +111,7 @@ router.put("/", rejectUnauthenticated, (req, res) => {
         console.error(error);
         res.sendStatus(500);
       });
+      // if this is an edit from the user
   } else {
     QUERY = `UPDATE experiences SET name=$1, description=$2, web_path=$3 WHERE id=$4;`;
 
