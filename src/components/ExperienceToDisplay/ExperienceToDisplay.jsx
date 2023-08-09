@@ -82,7 +82,7 @@ function ExperienceToDisplay({ experience, userId }) {
           <CardContent sx={{ flexGrow: 1 }}>
             <Typography>{experience.name}</Typography>
             <Input
-              multiline
+              fullWidth
               value={editToSend.description}
               onChange={(e) => {
                 setEditToSend({
