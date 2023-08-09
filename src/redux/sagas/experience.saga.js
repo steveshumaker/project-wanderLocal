@@ -27,15 +27,15 @@ function* addExperience(action) {
       throw new Error("Network response for POST was not OK");
     }
     // -------------- COMMENTED OUT FOR LIMITING RATE LIMIT ERRORS ---------------
-    // yield put({
-    //   type: "FETCH_EXTERNAL_DATA",
-    //   payload: {
-    //     name: action.payload.exp_name,
-    //     location_desc: action.payload.location_desc,
-    //     id: newExpId.id,
-    //   },
-    // });
-    // yield put({ type: "FETCH_USER_EXPERIENCE" });
+    yield put({
+      type: "FETCH_EXTERNAL_DATA",
+      payload: {
+        name: action.payload.exp_name,
+        location_desc: action.payload.location_desc,
+        id: newExpId.id,
+      },
+    });
+    yield put({ type: "FETCH_USER_EXPERIENCE" });
   } catch (error) {
     console.log("Experience post failed: ", error);
   }

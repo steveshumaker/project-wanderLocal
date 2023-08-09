@@ -38,21 +38,33 @@ function EntryPage() {
 
   const sendExperience = async (e) => {
     e.preventDefault();
+
     // send the photo to S3
     // need to handle submission if no selected file
     const formData = new FormData();
-    formData.append("image", selectedFile);
+    if (selectedFile !== undefined) {
+      formData.append("image", selectedFile);
+    } else {
+      formData.append("image", null);
+    }
+    // formData.append("image", selectedFile);
     const response = await fetch("/api/upload", {
       method: "POST",
       body: formData,
     });
     // receive the md5 (also the filename)
     const responseData = await response.json();
+
     const updatedExperience = {
       ...experienceToSend,
-      exp_tags: tags,
       photo_path: responseData,
+      exp_tags: tags,
     };
+
+    // const updatedExperience = {
+    //   ...experienceToSend,
+    //   exp_tags: tags,
+    // };
     setExperienceToSend(updatedExperience);
     // dispatch action to add experience
     dispatch({ type: "ADD_USER_EXPERIENCE", payload: updatedExperience });

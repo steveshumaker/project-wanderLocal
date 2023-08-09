@@ -95,13 +95,13 @@ router.put("/", rejectUnauthenticated, (req, res) => {
         res.sendStatus(500);
       });
   } else if (req.body.stars) {
-    QUERY = `UPDATE experiences SET stars=$1, rating=$2, web_path=$3, photo_path=$4 WHERE id=$5;`;
+    QUERY = `UPDATE experiences SET stars=$1, rating=$2, web_path=$3, yelp_path=$4 WHERE id=$5;`;
     pool
       .query(QUERY, [
         req.body.stars,
         req.body.reviews,
         req.body.web_path,
-        req.body.photo_path,
+        req.body.yelp_path,
         req.body.dataId,
       ])
       .then((result) => res.sendStatus(200))
