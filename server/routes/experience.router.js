@@ -68,7 +68,6 @@ router.post("/", rejectUnauthenticated, (req, res) => {
     ])
     .then((result) => {
       const createdId = result.rows[0].id;
-      // res.send(response).status(201);
       res.status(201).json({ id: createdId });
     })
     .catch((error) => {

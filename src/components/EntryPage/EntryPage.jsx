@@ -50,7 +50,7 @@ function EntryPage() {
       method: "POST",
       body: formData,
     });
-    // history.push("/display");
+    history.push("/display");
   };
 
   const handleKeyPress = (e) => {
@@ -92,7 +92,7 @@ function EntryPage() {
       // Save the resized file
       setSelectedFile(resizedFile);
 
-      // setExperienceToSend({ ...experienceToSend, photo_path: selectedFile });
+      // ------ TODO ----- image preview
       // Create a URL that can be used in an img tag for previewing the image
       // setImagePreview(URL.createObjectURL(resizedFile));
     } else {
@@ -181,12 +181,6 @@ function EntryPage() {
               label="pics."
               type="file"
               onChange={onFileChange}
-              // onChange={(e) => {
-              //   setExperienceToSend({
-              //     ...experienceToSend,
-              //     photo_path: URL.createObjectURL(e.target.files[0]),
-              //   });
-              // }}
               id="photoPathIn"
             />
             <TextField
