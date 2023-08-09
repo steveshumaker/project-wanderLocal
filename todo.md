@@ -63,8 +63,7 @@ potentially add another field in database to store web versus
 - else if image added:
   - use that image for the banner
 
-  add new route ('upload')
-  dispatch user experience
-  dispatch new saga action for image upload
-  dispatch yelp saga
+implement get route to fetch from correct S3 bucket
+display the picture somewhere
+implement the yelp/image logic
 
