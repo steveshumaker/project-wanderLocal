@@ -12,11 +12,15 @@ import Typography from "@mui/material/Typography";
 import Link from "@mui/material/Link";
 import Input from "@mui/material/Input";
 import Chip from "@mui/material/Chip";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import Switch from "@mui/material/Switch";
+import Stack from "@mui/material/Stack";
 
 function ExperienceToDisplay({ experience, userId }) {
   // local states for editing
   const [editToSend, setEditToSend] = useState({});
   const [editingId, setEditingId] = useState(null);
+  const [checked, setChecked] = useState(true);
 
   const user = useSelector((store) => store.user);
 
@@ -57,6 +61,10 @@ function ExperienceToDisplay({ experience, userId }) {
     });
   };
 
+  const handleChange = (event) => {
+    setChecked(event.target.checked);
+  };
+
   return (
     <div key={experience.this_id}>
       {isEditing ? (
@@ -76,7 +84,7 @@ function ExperienceToDisplay({ experience, userId }) {
             image={
               experience.photo_path === null
                 ? experience.yelp_path
-                : `https://wanderlocal-images.s3.amazonaws.com/images/${user.id}/${experience.photo_path}`
+                : experience.photo_path
             }
           />
           <CardContent sx={{ flexGrow: 1 }}>
@@ -130,7 +138,7 @@ function ExperienceToDisplay({ experience, userId }) {
             image={
               experience.photo_path === null
                 ? experience.yelp_path
-                : `https://wanderlocal-images.s3.amazonaws.com/images/${user.id}/${experience.photo_path}`
+                : experience.photo_path
             }
           />
           <CardContent sx={{ flexGrow: 1 }}>
@@ -140,14 +148,29 @@ function ExperienceToDisplay({ experience, userId }) {
             </Typography>
             <Typography>{experience.description} </Typography>
             <Typography>{experience.location_desc}</Typography>
-            {experience.rating ? (
+            {experience.user_id === user.id ? (
+              <Stack direction="row" spacing={1} alignItems="center">
+                <Typography>hide.</Typography>
+                <FormControlLabel
+                  control={
+                    <Switch
+                      checked={checked}
+                      onChange={handleChange}
+                      inputProps={{ "aria-label": "controlled" }}
+                    />
+                  }
+                />
+                <Typography>show.</Typography>
+              </Stack>
+            ) : null}
+            {experience.rating && checked ? (
               <Typography>Reviews: {experience.rating}</Typography>
             ) : null}
 
-            {experience.stars ? (
+            {experience.stars && checked ? (
               <img src={`/yelp_images/small_${Number(experience.stars)}.png`} />
             ) : null}
-            {experience.web_path ? (
+            {experience.web_path && checked ? (
               <Typography>
                 <Link target="_blank" href={experience.web_path}>
                   <img
@@ -156,7 +179,7 @@ function ExperienceToDisplay({ experience, userId }) {
                   />
                 </Link>
               </Typography>
-            ) : (
+            ) : checked ? (
               <Typography>
                 <Link
                   target="_blank"
@@ -168,12 +191,16 @@ function ExperienceToDisplay({ experience, userId }) {
                   />
                 </Link>
               </Typography>
+            ) : (
+              <Typography />
             )}
-            {experience.tags
-              ? experience.tags.map((tag) => {
-                  return <Chip key={tag} label={tag} />;
-                })
-              : null}
+            {experience.tags ? (
+              experience.tags.map((tag) => {
+                return <Chip key={tag} label={tag} />;
+              })
+            ) : (
+              <Typography />
+            )}
           </CardContent>
           {experience.user_id === user.id ? (
             <CardActions>
