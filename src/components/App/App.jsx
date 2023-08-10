@@ -45,6 +45,9 @@ function App() {
       error: {
         main: "#f44336",
       },
+      background: {
+        default: "#efcaca",
+      },
     },
     typography: {
       fontFamily: "Roboto",
