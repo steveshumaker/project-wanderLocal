@@ -45,12 +45,17 @@ function App() {
       error: {
         main: "#f44336",
       },
-      background: {
-        default: "#efcaca",
-      },
     },
-    typography: {
-      fontFamily: "Roboto",
+    components: {
+      MuiCssBaseline: {
+        styleOverrides: {
+          body: {
+            backgroundImage: `linear-gradient(19deg, #FAACA8 0%, #DDD6F3 100%)`,
+            backgroundRepeat: "no-repeat",
+            backgroundAttachment: "fixed",
+          },
+        },
+      },
     },
   };
 
