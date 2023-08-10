@@ -10,7 +10,7 @@
 - filter-able 'view' page [search page AND/OR list page?] [done!][have some todos below]
 - I think making 'info' into a non-protected route that lists a collage of experiences by location could be cool [this would be nice]
 - image upload [done]
-- tooltip for tag entry ('seperate by space, etc') AND tooltip for location (needed for yelp currently) [WIP]
+- tooltip for tag entry ('seperate by space, etc') AND tooltip for location (needed for yelp currently) [done] [can probably clean this up]
 - alert user after submitting, would smooth out async flow especially when submitting their own pic [done]
 - toggle commented - experienceToDisplay - need to figure out how to store the toggle so that it persists
 
