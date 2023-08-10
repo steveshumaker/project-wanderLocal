@@ -146,8 +146,12 @@ function ExperienceToDisplay({ experience, userId }) {
               {experience.name}
               {experience.favorite ? <span> ❤️</span> : null}
             </Typography>
-            <Typography>{experience.description} </Typography>
-            <Typography>{experience.location_desc}</Typography>
+            <Typography sx={{ my: "1px", ml: "1px" }}>
+              {experience.description}{" "}
+            </Typography>
+            <Typography sx={{ my: "1px", ml: "1px" }}>
+              {experience.location_desc}
+            </Typography>
             {/* {experience.user_id === user.id ? (
               <Stack direction="row" spacing={1} alignItems="center">
                 <Typography>hide.</Typography>
@@ -164,14 +168,16 @@ function ExperienceToDisplay({ experience, userId }) {
               </Stack>
             ) : null} */}
             {experience.rating && checked ? (
-              <Typography>Reviews: {experience.rating}</Typography>
+              <Typography sx={{ my: "1px", ml: "1px" }}>
+                Reviews: {experience.rating}
+              </Typography>
             ) : null}
 
             {experience.stars && checked ? (
               <img src={`/yelp_images/small_${Number(experience.stars)}.png`} />
             ) : null}
             {experience.web_path && checked ? (
-              <Typography>
+              <Typography sx={{ my: "1px", ml: "1px" }}>
                 <Link target="_blank" href={experience.web_path}>
                   <img
                     style={{ height: "1.25rem" }}
@@ -180,7 +186,7 @@ function ExperienceToDisplay({ experience, userId }) {
                 </Link>
               </Typography>
             ) : checked ? (
-              <Typography>
+              <Typography sx={{ my: "1px", ml: "1px" }}>
                 <Link
                   target="_blank"
                   href={`https://www.google.com/search?q=${experience.name}${experience.location_desc}`}
@@ -196,7 +202,15 @@ function ExperienceToDisplay({ experience, userId }) {
             )}
             {experience.tags ? (
               experience.tags.map((tag) => {
-                return <Chip key={tag} label={tag} />;
+                return (
+                  <Chip
+                    sx={{ mx: "1px", my: "1px" }}
+                    color={"primary"}
+                    variant="outlined"
+                    key={tag}
+                    label={tag}
+                  />
+                );
               })
             ) : (
               <Typography />
