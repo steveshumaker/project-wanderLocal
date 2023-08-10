@@ -1,3 +1,4 @@
+import { forwardRef } from "react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
@@ -10,7 +11,8 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import Chip from "@mui/material/Chip";
-import Input from "@mui/material/Input";
+import Snackbar from "@mui/material/Snackbar";
+import MuiAlert from "@mui/material/Alert";
 
 // store
 
@@ -19,6 +21,8 @@ function EntryPage() {
   const dispatch = useDispatch();
   const user = useSelector((store) => store.user);
 
+  // snackbar state
+  const [open, setOpen] = useState(false);
   // Selected image file name
   const [fileName, setFileName] = useState("");
   // Selected file type
@@ -40,6 +44,7 @@ function EntryPage() {
   // submit button handling
   const sendExperience = async (e) => {
     e.preventDefault();
+    handleClick();
 
     // send the photo to S3 as a formData object
     // if no selected file, send a null formData
@@ -68,7 +73,6 @@ function EntryPage() {
 
     // dispatch action to add experience
     dispatch({ type: "ADD_USER_EXPERIENCE", payload: updatedExperience });
-    history.push("/display");
   };
 
   // function that handles adding a tag to the tag state
@@ -118,6 +122,23 @@ function EntryPage() {
     } else {
       alert("Please select an image");
     }
+  };
+
+  // snackbar helpers
+  const Alert = forwardRef(function Alert(props, ref) {
+    return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+  });
+
+  const handleClick = () => {
+    setOpen(true);
+  };
+
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setOpen(false);
+    history.push("/display");
   };
 
   return (
@@ -241,6 +262,15 @@ function EntryPage() {
                 Cancel
               </Button>
             </center>
+            <Snackbar open={open} autoHideDuration={3000} onClose={handleClose}>
+              <Alert
+                onClose={handleClose}
+                severity="success"
+                sx={{ width: "100%" }}
+              >
+                experience added!
+              </Alert>
+            </Snackbar>
           </Box>
         </Box>
       </Container>
