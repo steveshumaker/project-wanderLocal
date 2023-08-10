@@ -13,6 +13,7 @@ import Container from "@mui/material/Container";
 import Chip from "@mui/material/Chip";
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from "@mui/material/Alert";
+import Tooltip from "@mui/material/Tooltip";
 
 // store
 
@@ -22,7 +23,9 @@ function EntryPage() {
   const user = useSelector((store) => store.user);
 
   // snackbar state
-  const [open, setOpen] = useState(false);
+  const [snackOpen, setSnackOpen] = useState(false);
+  // tooltip state
+  const [tooltipOpen, setTooltipOpen] = useState(false);
   // Selected image file name
   const [fileName, setFileName] = useState("");
   // Selected file type
@@ -44,7 +47,7 @@ function EntryPage() {
   // submit button handling
   const sendExperience = async (e) => {
     e.preventDefault();
-    handleClick();
+    handleSnackbarClick();
 
     // send the photo to S3 as a formData object
     // if no selected file, send a null formData
@@ -129,16 +132,25 @@ function EntryPage() {
     return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
   });
 
-  const handleClick = () => {
-    setOpen(true);
+  const handleSnackbarClick = () => {
+    setSnackOpen(true);
   };
 
-  const handleClose = (event, reason) => {
+  const handleSnackbarClose = (event, reason) => {
     if (reason === "clickaway") {
       return;
     }
-    setOpen(false);
+    setSnackOpen(false);
     history.push("/display");
+  };
+
+  // tooltip helpers
+  const handleTooltipOpen = () => {
+    setTooltipOpen(true);
+  };
+
+  const handleTooltipClose = () => {
+    setTooltipOpen(false);
   };
 
   return (
@@ -162,6 +174,7 @@ function EntryPage() {
             onSubmit={(e) => sendExperience(e)}
           >
             <TextField
+              required
               margin="normal"
               fullWidth
               label="name."
@@ -176,20 +189,29 @@ function EntryPage() {
               id="nameIn"
               type="text"
             />
-            <TextField
-              margin="normal"
-              fullWidth
-              label="city, state."
-              value={experienceToSend.location_desc}
-              onChange={(e) => {
-                setExperienceToSend({
-                  ...experienceToSend,
-                  location_desc: e.target.value,
-                });
-              }}
-              id="locIn"
-              type="text"
-            />
+            <Tooltip
+              open={tooltipOpen}
+              onClose={handleTooltipClose}
+              onOpen={handleTooltipOpen}
+              title="enter city, state"
+              placement="left"
+            >
+              <TextField
+                required
+                margin="normal"
+                fullWidth
+                label="city, state."
+                value={experienceToSend.location_desc}
+                onChange={(e) => {
+                  setExperienceToSend({
+                    ...experienceToSend,
+                    location_desc: e.target.value,
+                  });
+                }}
+                id="locIn"
+                type="text"
+              />
+            </Tooltip>
             <TextField
               margin="normal"
               fullWidth
@@ -206,7 +228,6 @@ function EntryPage() {
             />
             <TextField
               fullWidth
-              onMouseEnter={() => console.log("test")}
               type="file"
               onChange={onFileChange}
               id="photoPathIn"
@@ -227,20 +248,31 @@ function EntryPage() {
               id="webPathIn"
               type="text"
             />
-            <TextField
-              margin="normal"
-              fullWidth
-              label="tags."
-              value={tags[-1]}
-              onKeyDown={(e) => {
-                handleKeyPress(e);
-              }}
-              id="tagsIn"
-              type="text"
-            />
+            <Tooltip
+              open={tooltipOpen}
+              onClose={handleTooltipClose}
+              onOpen={handleTooltipOpen}
+              title="press space to enter a tag!"
+              placement="left"
+            >
+              <TextField
+                autoComplete="off"
+                margin="normal"
+                fullWidth
+                label="tags."
+                value={tags[-1]}
+                onKeyDown={(e) => {
+                  handleKeyPress(e);
+                }}
+                id="tagsIn"
+                type="text"
+              />
+            </Tooltip>
             {tags.length > 0
               ? tags.map((tag) => {
-                  return <Chip key={tag} label={tag} />; // give tags a key
+                  return (
+                    <Chip sx={{ mx: "2px", my: "1px" }} key={tag} label={tag} />
+                  ); // give tags a key
                 })
               : null}
             <Button
@@ -262,9 +294,13 @@ function EntryPage() {
                 Cancel
               </Button>
             </center>
-            <Snackbar open={open} autoHideDuration={3000} onClose={handleClose}>
+            <Snackbar
+              open={snackOpen}
+              autoHideDuration={3000}
+              onClose={handleSnackbarClose}
+            >
               <Alert
-                onClose={handleClose}
+                onClose={handleSnackbarClose}
                 severity="success"
                 sx={{ width: "100%" }}
               >
