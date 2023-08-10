@@ -43,7 +43,10 @@ function SearchPage() {
   useEffect(() => {
     console.log("PAGE LOADED");
     // Set the tag list on page load
-    // dispatch({ type: "FETCH_ALL_EXPERIENCES" });
+    dispatch({ type: "FETCH_ALL_EXPERIENCES" });
+    setTimeout(() => {
+      
+    }, 1000);
     if (experiences.length > 0) {
       experiences.map((experience) => {
         if (experience.tags !== null) {
@@ -116,7 +119,7 @@ function SearchPage() {
             <Container sx={{ py: 1 }} maxWidth="md">
               <Grid container spacing={4}>
                 {experiences.map((experience) => {
-                  // can probably set tags to default as empty 
+                  // can probably set tags to default as empty
                   // and change this to a filter
                   for (let searchTerm of search) {
                     if (experience.tags) {
