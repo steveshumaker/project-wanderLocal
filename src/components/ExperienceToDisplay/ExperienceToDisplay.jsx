@@ -20,7 +20,7 @@ function ExperienceToDisplay({ experience, userId }) {
   // local states for editing
   const [editToSend, setEditToSend] = useState({});
   const [editingId, setEditingId] = useState(null);
-  const [checked, setChecked] = useState(true);
+  const [checked, setChecked] = useState(experience.toggle_external);
 
   const user = useSelector((store) => store.user);
 
@@ -61,8 +61,17 @@ function ExperienceToDisplay({ experience, userId }) {
     });
   };
 
+  // toggle functionality for external toggle
   const handleChange = (event) => {
-    setChecked(event.target.checked);
+    const updatedToggle = !checked;
+    setChecked(updatedToggle);
+    dispatch({
+      type: "UPDATE_EXPERIENCE",
+      payload: {
+        expId: experience.this_id,
+        toggle_ext: updatedToggle,
+      },
+    });
   };
 
   return (
@@ -152,7 +161,7 @@ function ExperienceToDisplay({ experience, userId }) {
             <Typography sx={{ my: "1px", ml: "1px" }}>
               {experience.location_desc}
             </Typography>
-            {/* {experience.user_id === user.id ? (
+            {experience.user_id === user.id ? (
               <Stack direction="row" spacing={1} alignItems="center">
                 <Typography>hide.</Typography>
                 <FormControlLabel
@@ -166,7 +175,7 @@ function ExperienceToDisplay({ experience, userId }) {
                 />
                 <Typography>show.</Typography>
               </Stack>
-            ) : null} */}
+            ) : null}
             {experience.rating && checked ? (
               <Typography sx={{ my: "1px", ml: "1px" }}>
                 Reviews: {experience.rating}
