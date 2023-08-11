@@ -52,11 +52,9 @@ router.post("/", rejectUnauthenticated, (req, res) => {
   } = req.body;
   const user_id = req.user.id;
 
-
   const QUERY = `INSERT INTO experiences
   (name, description, web_path, user_id, location_desc, tags, photo_path)
   VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING id;`;
-
 
   pool
     .query(QUERY, [
@@ -66,7 +64,7 @@ router.post("/", rejectUnauthenticated, (req, res) => {
       user_id,
       location_desc,
       exp_tags,
-      photo_path
+      photo_path,
     ])
     .then((result) => {
       const createdId = result.rows[0].id;
@@ -95,7 +93,7 @@ router.put("/", rejectUnauthenticated, (req, res) => {
         console.error(error);
         res.sendStatus(500);
       });
-      // if this is the external data update from the add experience saga
+    // if this is the external data update from the add experience saga
   } else if (req.body.stars) {
     QUERY = `UPDATE experiences SET stars=$1, rating=$2, web_path=$3, yelp_path=$4 WHERE id=$5;`;
     pool
@@ -111,9 +109,20 @@ router.put("/", rejectUnauthenticated, (req, res) => {
         console.error(error);
         res.sendStatus(500);
       });
-      // if this is an edit from the user
+    // if this is a toggle
+  } else if (req.body.toggle_ext || !req.body.toggle_ext) {
+    QUERY = `UPDATE experiences SET toggle_external=$1 WHERE id=$2;`;
+
+    pool
+      .query(QUERY, [req.body.toggle_ext, req.body.expId])
+      .then((result) => res.sendStatus(200))
+      .catch((error) => {
+        console.error(error);
+        res.sendStatus(500);
+      });
+    // if this is an edit from the user
   } else {
-    QUERY = `UPDATE experiences SET name=$1, description=$2, web_path=$3 WHERE id=$4;`;
+    QUERY = `UPDATE experiences SET name=$1, description=$2, web_path=$3, WHERE id=$4;`;
 
     pool
       .query(QUERY, [
