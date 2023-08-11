@@ -65,11 +65,22 @@ function EntryPage() {
     const responseData = await response.json();
 
     // update the payload to include the photopath (md5)
-    const updatedExperience = {
-      ...experienceToSend,
-      photo_path: `https://wanderlocal-images.s3.amazonaws.com/images/${user.id}/${responseData}`,
-      exp_tags: tags,
-    };
+    // conditional check to set the photo path depending on if
+    // a file is uploaded or not
+    let updatedExperience;
+    if (selectedFile !== undefined) {
+      updatedExperience = {
+        ...experienceToSend,
+        photo_path: `https://wanderlocal-images.s3.amazonaws.com/images/${user.id}/${responseData}`,
+        exp_tags: tags,
+      };
+    } else {
+      updatedExperience = {
+        ...experienceToSend,
+        photo_path: null,
+        exp_tags: tags,
+      };
+    }
 
     // update the state of the sent experience
     setExperienceToSend(updatedExperience);
