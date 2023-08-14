@@ -20,8 +20,6 @@ const s3Client = new S3Client({
 
 // post
 router.post("/", rejectUnauthenticated, (req, res) => {
-  console.log("IN POST");
-
   // if the file body is null (no photo provided)
   if (req.files === null) {
     res.json(null).status(200);
@@ -42,6 +40,17 @@ router.post("/", rejectUnauthenticated, (req, res) => {
       res.json(hash).status(200);
     });
   }
+});
+
+router.get("/random", (req, res) => {
+  const QUERY = `SELECT photo_path FROM experiences WHERE photo_path IS NOT NULL;`;
+
+  pool
+    .query(QUERY)
+    .then((result) => {
+      res.send(result.rows).status(200);
+    })
+    .catch((err) => console.error(err));
 });
 
 module.exports = router;

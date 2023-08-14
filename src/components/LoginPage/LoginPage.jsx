@@ -1,6 +1,7 @@
 import React from "react";
 import LoginForm from "../LoginForm/LoginForm";
 import { useHistory } from "react-router-dom";
+import { useEffect, useState } from "react";
 // MUI
 import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
@@ -10,6 +11,26 @@ import Box from "@mui/material/Box";
 
 function LoginPage() {
   const history = useHistory();
+  const [randomImage, setRandomImage] = useState("");
+
+  // THIS CAN BE MOVED TO A UTILS DIR
+  // functions that get all uploaded URLs then choose a random
+  // one to display
+  const getUrl = async () => {
+    const promise = await fetch("/api/upload/random");
+    const fetchedUrls = await promise.json();
+    const path = getRandomPic(fetchedUrls);
+    setRandomImage(path);
+  };
+
+  const getRandomPic = (paths) => {
+    const idx = Math.floor(Math.random() * paths.length);
+    return paths[idx].photo_path;
+  };
+
+  useEffect(() => {
+    getUrl();
+  }, []);
 
   return (
     <Grid container component="main" sx={{ mtheight: "100vh" }}>
@@ -22,7 +43,7 @@ function LoginPage() {
         sm={4}
         md={7}
         sx={{
-          backgroundImage: "url(https://source.unsplash.com/random?wallpapers)",
+          backgroundImage: `url(${randomImage})`,
           backgroundRepeat: "no-repeat",
           backgroundColor: (t) =>
             t.palette.mode === "light"
