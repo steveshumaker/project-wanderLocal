@@ -8,18 +8,18 @@
 - basic styling [ok]
 - - _more_ styling
 - filter-able 'view' page [search page AND/OR list page?] [done!][have some todos below] [done] [notes below]
-- I think making 'info' into a non-protected route that lists a collage of experiences by location could be cool [this would be nice]
+- I think making 'info' into a non-protected route that lists a collage of experiences by location could be cool [this would be nice] [WIP - notes below]
 - image upload [done]
 - tooltip for tag entry ('seperate by space, etc') AND tooltip for location (needed for yelp currently) [done] [can probably clean this up]
 - alert user after submitting, would smooth out async flow especially when submitting their own pic [done]
-- toggle commented - experienceToDisplay - need to figure out how to store the toggle so that it persists [WIP]
+- toggle commented - experienceToDisplay - need to figure out how to store the toggle so that it persists [done]
 
 ## CLEANUP
 
 - remove unneeded components
 - comment everything
 
-## Search page
+## Search page [done]
 
 - Any user can navigate to this page
 - Once on the page, they can click on tags to display experiences that contain that/those tags
@@ -53,7 +53,7 @@ display all items
 - - display those
 - once search bar is empty, display all experiences
 
-### Yelp API notes
+### Yelp API notes [done]
 
 1. business name -> business details [no - generic search w correct params]
 2. business details.id -> id search - might not need this [we dont]
@@ -71,6 +71,15 @@ potentially add another field in database to store web versus
   - else if image returned: image
 - else if image added:
   - use that image for the banner
+
+## Info Page [WIP]
+
+- get every ID
+- get every md5 for every ID
+- figure out how to store them
+- OR potentially don't need to store them - can create array of photo paths
+  and display them randomly/display one randomly
+- can also apply this to sign on page
 
 # FLOWS
 
