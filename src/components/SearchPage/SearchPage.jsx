@@ -72,7 +72,7 @@ function SearchPage() {
             sx={{
               bgcolor: "background.paper",
               pt: 8,
-              pb: 6,
+              pb: 2,
             }}
           >
             <Container maxWidth="sm">
@@ -101,11 +101,11 @@ function SearchPage() {
             </Container>
           </Box>
           {search.length === 0 ? (
-            <Container sx={{ py: 1 }} maxWidth="md">
-              <Grid container spacing={4}>
+            <Container sx={{ py: 2 }} maxWidth="lg">
+              <Grid container spacing={2}>
                 {experiences.map((experience) => {
                   return (
-                    <Grid item key={experience.this_id} xs={18} sm={9} md={6}>
+                    <Grid item key={experience.this_id} xs={18} sm={9} md={4}>
                       <ExperienceToDisplay
                         key={experience.this_id}
                         experience={experience}
