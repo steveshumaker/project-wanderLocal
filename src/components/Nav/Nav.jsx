@@ -40,7 +40,7 @@ function Nav() {
             color="inherit"
             noWrap
             sx={{ flexGrow: 1, textDecoration: "none" }}
-            href="/"
+            href="/#about"
           >
             wanderLocal
           </Typography>
