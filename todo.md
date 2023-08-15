@@ -13,6 +13,7 @@
 - tooltip for tag entry ('seperate by space, etc') AND tooltip for location (needed for yelp currently) [done] [can probably clean this up]
 - alert user after submitting, would smooth out async flow especially when submitting their own pic [done]
 - toggle commented - experienceToDisplay - need to figure out how to store the toggle so that it persists [done]
+- google maps API - click icon to locate on a map
 
 ## CLEANUP
 
@@ -72,7 +73,7 @@ potentially add another field in database to store web versus
 - else if image added:
   - use that image for the banner
 
-## Info Page [WIP]
+## Info Page [done]
 
 - get every ID
 - get every md5 for every ID
