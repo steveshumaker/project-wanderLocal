@@ -43,7 +43,9 @@ router.post("/", rejectUnauthenticated, (req, res) => {
 });
 
 router.get("/random", (req, res) => {
-  const QUERY = `SELECT photo_path FROM experiences WHERE photo_path IS NOT NULL;`;
+  const QUERY = `SELECT photo_path, username FROM experiences 
+  JOIN "user" ON experiences.user_id = "user".id
+  WHERE photo_path IS NOT NULL;`;
 
   pool
     .query(QUERY)

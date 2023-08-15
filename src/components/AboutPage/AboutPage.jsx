@@ -9,6 +9,7 @@ import Grid from "@mui/material/Grid";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
+import ImageListItemBar from "@mui/material/ImageListItemBar";
 
 function AboutPage() {
   const [imageList, setImageList] = useState([]);
@@ -25,7 +26,6 @@ function AboutPage() {
     setTimeout(() => {
       setLoaded(true);
     }, 1000);
-    console.log(imageList);
   }, []);
 
   return (
@@ -36,7 +36,7 @@ function AboutPage() {
         </Box>
       ) : (
         <Grid container spacing={2}>
-          <Grid item xs={7}>
+          <Grid item xs={7} sx={{ overflowY: "scroll" }}>
             <ImageList
               sx={{ width: "100%", height: "100%" }}
               variant="woven"
@@ -51,21 +51,23 @@ function AboutPage() {
                     // alt={item.title}
                     loading="lazy"
                   />
+                  <ImageListItemBar position="below" title={item.username} />
                 </ImageListItem>
               ))}
             </ImageList>
           </Grid>
           <Grid item xs={5}>
-            <Card sx={{ mb: "10px" }}>
+            <Card raised sx={{ mb: "10px" }}>
               <CardContent sx={{ textAlign: "center" }}>
                 <Typography sx={{ fontSize: 14 }} color="text.primary">
                   I would like to extend a huge thank you to the Prime
                   instructors - Zac, Chris, and Peter. Thank you for letting me
-                  bother you with my questions.
+                  bother you with my questions, and for helping us all over the
+                  last five(!!) plus months.
                 </Typography>
               </CardContent>
             </Card>
-            <Card sx={{ mb: "10px" }}>
+            <Card raised sx={{ mb: "10px" }}>
               <CardContent sx={{ textAlign: "center" }}>
                 <Typography sx={{ fontSize: 14 }} color="text.primary">
                   A second huge thank you goes to my classmates - thanks for all
@@ -74,11 +76,19 @@ function AboutPage() {
                 </Typography>
               </CardContent>
             </Card>
-            <Card>
+            <Card raised sx={{ mb: "10px" }}>
               <CardContent sx={{ textAlign: "center" }}>
                 <Typography sx={{ fontSize: 14 }} color="text.primary">
                   A final thank you to my pup, Harley - thank you for dealing
                   with the reduced Tuesday and Wednesday walks.
+                </Typography>
+              </CardContent>
+            </Card>
+            <Card raised>
+              <CardContent sx={{ textAlign: "center" }}>
+                <Typography sx={{ fontSize: 14 }} color="text.primary">
+                  Technologies used: PostgreSQL, Express, React, Node.js,
+                  MaterialUI, AWS S3, JavaScript
                 </Typography>
               </CardContent>
             </Card>
