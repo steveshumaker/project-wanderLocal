@@ -14,7 +14,7 @@
 - alert user after submitting, would smooth out async flow especially when submitting their own pic [done]
 - toggle commented - experienceToDisplay - need to figure out how to store the toggle so that it persists [done]
 - google maps API - click icon to locate on a map
-- NEED TO FIX UP EDIT FUNCTIONALITY
+- NEED TO FIX UP EDIT FUNCTIONALITY [done]
 
 ## CLEANUP
 
