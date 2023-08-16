@@ -75,13 +75,25 @@ function SearchPage() {
       >
         experiences.
       </Typography>
-      <Link
-        color="text.primary"
-        underline="hover"
-        onClick={() => setAltState(!altState)}
-      >
-        prefer to sort? click here.
-      </Link>
+      <Container align="center">
+        {!altState ? (
+          <Link
+            color="text.primary"
+            underline="hover"
+            onClick={() => setAltState(!altState)}
+          >
+            prefer to sort? click here.
+          </Link>
+        ) : (
+          <Link
+            color="text.primary"
+            underline="hover"
+            onClick={() => setAltState(!altState)}
+          >
+            prefer the original view? click here.
+          </Link>
+        )}
+      </Container>
 
       {altState ? (
         <AlternateSearchPage />
