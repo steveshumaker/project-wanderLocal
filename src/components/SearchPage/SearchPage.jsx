@@ -78,7 +78,7 @@ function SearchPage() {
       <Container align="center">
         {!altState ? (
           <Link
-            color="text.primary"
+            color="text.secondary"
             underline="hover"
             onClick={() => setAltState(!altState)}
           >
@@ -86,7 +86,7 @@ function SearchPage() {
           </Link>
         ) : (
           <Link
-            color="text.primary"
+            color="text.secondary"
             underline="hover"
             onClick={() => setAltState(!altState)}
           >
