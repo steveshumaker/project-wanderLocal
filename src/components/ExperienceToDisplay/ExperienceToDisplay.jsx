@@ -40,7 +40,7 @@ function ExperienceToDisplay({ experience, userId }) {
       id: experience.this_id,
       name: experience.name,
       description: experience.description,
-      loc_description: experience.loc_description,
+      loc_description: experience.location_description,
       web_path: experience.web_path,
     });
   };
@@ -64,7 +64,7 @@ function ExperienceToDisplay({ experience, userId }) {
     const updatedToggle = !checked;
     setChecked(updatedToggle);
     dispatch({
-      type: "UPDATE_EXPERIENCE",
+      type: "UPDATE_SHOW_EXTERNAL",
       payload: {
         expId: experience.this_id,
         toggle_ext: updatedToggle,

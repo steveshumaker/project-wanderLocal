@@ -109,20 +109,10 @@ router.put("/", rejectUnauthenticated, (req, res) => {
         console.error(error);
         res.sendStatus(500);
       });
-    // if this is a toggle
-  } else if (req.body.toggle_ext || !req.body.toggle_ext) {
-    QUERY = `UPDATE experiences SET toggle_external=$1 WHERE id=$2;`;
-
-    pool
-      .query(QUERY, [req.body.toggle_ext, req.body.expId])
-      .then((result) => res.sendStatus(200))
-      .catch((error) => {
-        console.error(error);
-        res.sendStatus(500);
-      });
-    // if this is an edit from the user
+    // if this is a normal edit
   } else {
-    QUERY = `UPDATE experiences SET name=$1, description=$2, web_path=$3, WHERE id=$4;`;
+    console.log("here");
+    QUERY = `UPDATE experiences SET name=$1, description=$2, web_path=$3 WHERE id=$4;`;
 
     pool
       .query(QUERY, [
@@ -137,6 +127,17 @@ router.put("/", rejectUnauthenticated, (req, res) => {
         res.sendStatus(500);
       });
   }
+});
+
+router.put("/toggleExternal", rejectUnauthenticated, (req, res) => {
+  QUERY = `UPDATE experiences SET toggle_external=$1 WHERE id=$2;`;
+  pool
+    .query(QUERY, [req.body.toggle_ext, req.body.expId])
+    .then((result) => res.sendStatus(200))
+    .catch((error) => {
+      console.error(error);
+      res.sendStatus(500);
+    });
 });
 
 // delete

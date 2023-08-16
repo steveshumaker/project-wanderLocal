@@ -59,6 +59,24 @@ function* updateExperience(action) {
   }
 }
 
+function* toggleExternal(action) {
+  try {
+    const response = yield fetch("/api/experience/toggleExternal", {
+      method: "PUT",
+      body: JSON.stringify(action.payload),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    if (!response.ok) {
+      throw new Error("Network response for PUT was not OK");
+    }
+    yield put({ type: "FETCH_USER_EXPERIENCE" });
+  } catch (error) {
+    console.log("Experience update failed: ", error);
+  }
+}
+
 function* deleteExperience(action) {
   try {
     const response = yield fetch("/api/experience", {
@@ -81,7 +99,8 @@ function* experienceSaga() {
   yield takeEvery("FETCH_USER_EXPERIENCE", fetchExperiences),
     yield takeEvery("ADD_USER_EXPERIENCE", addExperience),
     yield takeEvery("UPDATE_EXPERIENCE", updateExperience),
-    yield takeEvery("DELETE_EXPERIENCE", deleteExperience);
+    yield takeEvery("DELETE_EXPERIENCE", deleteExperience),
+    yield takeEvery("UPDATE_SHOW_EXTERNAL", toggleExternal);
 }
 
 export default experienceSaga;
