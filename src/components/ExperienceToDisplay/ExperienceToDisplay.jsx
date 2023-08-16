@@ -40,7 +40,7 @@ function ExperienceToDisplay({ experience, userId }) {
       id: experience.this_id,
       name: experience.name,
       description: experience.description,
-      loc_description: experience.location_description,
+      loc_description: experience.location_desc,
       web_path: experience.web_path,
     });
   };
@@ -106,7 +106,16 @@ function ExperienceToDisplay({ experience, userId }) {
                 });
               }}
             />
-            <p>{experience.location_desc}</p>
+            <Input
+              fullWidth
+              value={editToSend.loc_description}
+              onChange={(e) => {
+                setEditToSend({
+                  ...editToSend,
+                  loc_description: e.target.value,
+                });
+              }}
+            />{" "}
             <Input
               fullWidth
               value={editToSend.web_path}

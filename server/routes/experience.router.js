@@ -112,13 +112,14 @@ router.put("/", rejectUnauthenticated, (req, res) => {
     // if this is a normal edit
   } else {
     console.log("here");
-    QUERY = `UPDATE experiences SET name=$1, description=$2, web_path=$3 WHERE id=$4;`;
+    QUERY = `UPDATE experiences SET name=$1, description=$2, web_path=$3, location_desc=$4 WHERE id=$5;`;
 
     pool
       .query(QUERY, [
         req.body.name,
         req.body.description,
         req.body.web_path,
+        req.body.loc_description,
         req.body.id,
       ])
       .then((result) => res.sendStatus(200))
