@@ -11,6 +11,7 @@ import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
 import Autocomplete from "@mui/material/Autocomplete";
 import TextField from "@mui/material/TextField";
+import Link from "@mui/material/Link";
 
 function SearchPage() {
   const dispatch = useDispatch();
@@ -65,7 +66,24 @@ function SearchPage() {
 
   return (
     <div>
-      {!altState ? (
+      <Typography
+        component="h1"
+        variant="h2"
+        align="center"
+        color="text.primary"
+        // gutterBottom
+      >
+        experiences.
+      </Typography>
+      <Link
+        color="text.primary"
+        underline="hover"
+        onClick={() => setAltState(!altState)}
+      >
+        prefer to sort? click here.
+      </Link>
+
+      {altState ? (
         <AlternateSearchPage />
       ) : (
         <div>
@@ -73,21 +91,11 @@ function SearchPage() {
           <main>
             <Box
               sx={{
-                bgcolor: "background.paper",
-                pt: 8,
+                pt: 2,
                 pb: 2,
               }}
             >
               <Container maxWidth="sm">
-                <Typography
-                  component="h1"
-                  variant="h2"
-                  align="center"
-                  color="text.primary"
-                  gutterBottom
-                >
-                  experiences.
-                </Typography>
                 <Autocomplete
                   sx={{ width: "500px" }}
                   multiple
