@@ -58,7 +58,7 @@ router.post("/", rejectUnauthenticated, (req, res) => {
 
   pool
     .query(QUERY, [
-      exp_name,
+      exp_name[0].toUpperCase() + exp_name.slice(1),
       description,
       web_path,
       user_id,
