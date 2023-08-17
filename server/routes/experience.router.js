@@ -59,7 +59,7 @@ router.post("/", rejectUnauthenticated, (req, res) => {
   pool
     .query(QUERY, [
       exp_name[0].toUpperCase() + exp_name.slice(1),
-      description,
+      description[0].toUpperCase() + description.slice(1),
       web_path,
       user_id,
       location_desc,
@@ -116,8 +116,8 @@ router.put("/", rejectUnauthenticated, (req, res) => {
 
     pool
       .query(QUERY, [
-        req.body.name,
-        req.body.description,
+        req.body.name[0].toUpperCase() + req.body.name.slice(1),
+        req.body.description[0].toUpperCase() + req.body.description.slice(1),
         req.body.web_path,
         req.body.loc_description,
         req.body.id,
