@@ -13,6 +13,7 @@ import Chip from "@mui/material/Chip";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Switch from "@mui/material/Switch";
 import Stack from "@mui/material/Stack";
+import Divider from "@mui/material/Divider";
 
 function ExperienceToDisplay({ experience, userId }) {
   // local states for editing
@@ -158,16 +159,19 @@ function ExperienceToDisplay({ experience, userId }) {
             }
           />
           <CardContent sx={{ flexGrow: 1 }}>
-            <Typography gutterBottom variant="h5" component="h2">
+            <Typography gutterBottom variant="h6" component="h3">
               {experience.name}
               {experience.favorite ? <span> ❤️</span> : null}
             </Typography>
-            <Typography sx={{ my: "1px", ml: "1px" }}>
-              {experience.description}{" "}
-            </Typography>
-            <Typography sx={{ my: "1px", ml: "1px" }}>
+            <Divider />
+
+            <Typography variant="overline" sx={{ ml: "1px" }}>
               {experience.location_desc}
             </Typography>
+            <Typography variant="body2" sx={{ my: "1px", ml: "1px" }}>
+              {experience.description}
+            </Typography>
+            <Divider />
             {experience.user_id === user.id ? (
               <Stack direction="row" spacing={1} alignItems="center">
                 <Typography>hide.</Typography>
@@ -216,6 +220,8 @@ function ExperienceToDisplay({ experience, userId }) {
             ) : (
               <Typography />
             )}
+            <Divider sx={{ mb: ".5rem" }} />
+
             {experience.tags ? (
               experience.tags.map((tag) => {
                 return (
@@ -232,6 +238,8 @@ function ExperienceToDisplay({ experience, userId }) {
               <Typography />
             )}
           </CardContent>
+          <Divider />
+
           {experience.user_id === user.id ? (
             <CardActions>
               <Button
