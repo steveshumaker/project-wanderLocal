@@ -286,7 +286,9 @@ function EntryPage() {
                   ); // give tags a key
                 })
               : null}
-            {!experienceToSend.exp_name || !experienceToSend.location_desc ? (
+            {!experienceToSend.exp_name ||
+            !experienceToSend.location_desc ||
+            experienceToSend.location_desc.split(",").length === 1 ? (
               <Button
                 color="success"
                 fullWidth
