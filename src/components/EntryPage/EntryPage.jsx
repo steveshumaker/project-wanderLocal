@@ -224,6 +224,7 @@ function EntryPage() {
               />
             </Tooltip>
             <TextField
+              required
               margin="normal"
               fullWidth
               label="description."

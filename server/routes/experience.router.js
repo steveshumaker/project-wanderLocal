@@ -51,6 +51,7 @@ router.post("/", rejectUnauthenticated, (req, res) => {
     photo_path,
   } = req.body;
   const user_id = req.user.id;
+  const locationToAdd = location_desc.toLowerCase();
 
   const QUERY = `INSERT INTO experiences
   (name, description, web_path, user_id, location_desc, tags, photo_path)
@@ -62,7 +63,7 @@ router.post("/", rejectUnauthenticated, (req, res) => {
       description[0].toUpperCase() + description.slice(1),
       web_path,
       user_id,
-      location_desc,
+      locationToAdd,
       exp_tags,
       photo_path,
     ])
