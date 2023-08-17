@@ -286,15 +286,29 @@ function EntryPage() {
                   ); // give tags a key
                 })
               : null}
-            <Button
-              color="success"
-              fullWidth
-              variant="contained"
-              sx={{ mt: 2, mb: 1 }}
-              type="submit"
-            >
-              Save
-            </Button>
+            {!experienceToSend.exp_name || !experienceToSend.location_desc ? (
+              <Button
+                color="success"
+                fullWidth
+                variant="contained"
+                sx={{ mt: 2, mb: 1 }}
+                type="submit"
+                disabled
+              >
+                Save
+              </Button>
+            ) : (
+              <Button
+                color="success"
+                fullWidth
+                variant="contained"
+                sx={{ mt: 2, mb: 1 }}
+                type="submit"
+              >
+                Save
+              </Button>
+            )}
+
             <center>
               <Button
                 color="error"

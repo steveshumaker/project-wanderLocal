@@ -303,7 +303,7 @@ function AlternateSearchPage() {
                     role="checkbox"
                     aria-checked={isItemSelected}
                     tabIndex={-1}
-                    key={row.name}
+                    key={row.name + row.location + row.description}
                     selected={isItemSelected}
                     sx={{ cursor: "pointer" }}
                   >
