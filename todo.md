@@ -8,18 +8,15 @@
 - basic styling [ok]
 - - _more_ styling
 - filter-able 'view' page [search page AND/OR list page?] [done!][have some todos below] [done] [notes below]
-- I think making 'info' into a non-protected route that lists a collage of experiences by location could be cool [this would be nice] [WIP - notes below]
+- I think making 'info' into a non-protected route that lists a collage of experiences by location could be cool [this would be nice] [done - collage and info page]
 - image upload [done]
 - tooltip for tag entry ('seperate by space, etc') AND tooltip for location (needed for yelp currently) [done] [can probably clean this up]
 - alert user after submitting, would smooth out async flow especially when submitting their own pic [done]
 - toggle commented - experienceToDisplay - need to figure out how to store the toggle so that it persists [done]
-- google maps API - click icon to locate on a map
+- google maps API - click icon to locate on a map [future]
 - NEED TO FIX UP EDIT FUNCTIONALITY [done]
-
-## CLEANUP
-
-- remove unneeded components
-- comment everything
+- last thing to figure out before presentations - populating tags
+- comments
 
 ## Search page [done]
 
