@@ -12,13 +12,14 @@ const {
   S3Client,
 } = require("@aws-sdk/client-s3");
 
+// s3 initialization using env vars
 const s3Client = new S3Client({
   accessKeyId: process.env.AWS_ACCESS_KEY_ID,
   secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
   region: process.env.AWS_REGION,
 });
 
-// post
+// post an image to a user's S3 bucket
 router.post("/", rejectUnauthenticated, (req, res) => {
   // if the file body is null (no photo provided)
   if (req.files === null) {
@@ -36,12 +37,15 @@ router.post("/", rejectUnauthenticated, (req, res) => {
     });
 
     // send back the md5 hash to store in the database
+    // used for accessing the photos
     s3Client.send(command).then((response) => {
       res.json(hash).status(200);
     });
   }
 });
 
+// get route that sends data to populate the random image on login
+// and register pages
 router.get("/random", (req, res) => {
   const QUERY = `SELECT photo_path, username FROM experiences 
   JOIN "user" ON experiences.user_id = "user".id

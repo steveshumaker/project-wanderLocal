@@ -15,17 +15,14 @@
 - toggle commented - experienceToDisplay - need to figure out how to store the toggle so that it persists [done]
 - google maps API - click icon to locate on a map [future]
 - NEED TO FIX UP EDIT FUNCTIONALITY [done]
-- last thing to figure out before presentations - populating tags
+- last thing to figure out before presentations - populating tags [done]
+- potentially dockerize and push to ECS
 - comments
 
 ## Search page [done]
 
 - Any user can navigate to this page
 - Once on the page, they can click on tags to display experiences that contain that/those tags
-
-# TODO:
-
-- Refresh kills the page. You also need to nav away then back to populate the tags. There's got to be a way to fix that [done] [bandaid - there's probably a better way]
 
 ### Search feature notes
 

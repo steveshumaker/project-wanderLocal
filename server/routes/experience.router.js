@@ -5,7 +5,7 @@ const {
 const pool = require("../modules/pool");
 const router = express.Router();
 
-// get
+// get a single user's experiences
 router.get("/", rejectUnauthenticated, (req, res) => {
   const QUERY = `SELECT *, experiences.id AS this_id FROM experiences
   JOIN "user" ON "user".id = experiences.user_id
@@ -39,7 +39,7 @@ router.get("/all", (req, res) => {
     });
 });
 
-// post
+// post an experience
 router.post("/", rejectUnauthenticated, (req, res) => {
   console.log("IN POST");
   const {
@@ -77,7 +77,8 @@ router.post("/", rejectUnauthenticated, (req, res) => {
     });
 });
 
-// update TODO - this looks like it can be cleaned up
+// PUT route to handle various update states
+// TODO - this looks like it can be cleaned up
 router.put("/", rejectUnauthenticated, (req, res) => {
   let QUERY = "";
   // if this is a favorites toggle
@@ -131,6 +132,8 @@ router.put("/", rejectUnauthenticated, (req, res) => {
   }
 });
 
+// PUT route to handle the external data toggle so that
+// it persists
 router.put("/toggleExternal", rejectUnauthenticated, (req, res) => {
   QUERY = `UPDATE experiences SET toggle_external=$1 WHERE id=$2;`;
   pool
@@ -142,7 +145,7 @@ router.put("/toggleExternal", rejectUnauthenticated, (req, res) => {
     });
 });
 
-// delete
+// delete an experience
 router.delete("/", rejectUnauthenticated, (req, res) => {
   const idToDel = req.body.delId;
   const QUERY = `DELETE FROM experiences WHERE id=$1;`;

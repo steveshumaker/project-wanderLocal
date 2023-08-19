@@ -1,6 +1,8 @@
 const express = require("express");
 const router = express.Router();
 
+// get route to fetch external data from yelp API
+// happens after POST in a separate PUT
 router.get("/:name/:location", (req, res) => {
   const busName = req.params.name;
   const busLoc = req.params.location;

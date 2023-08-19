@@ -25,9 +25,13 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 /* Routes */
+// auth
 app.use("/api/user", userRouter);
+// add/update/delete experiences
 app.use("/api/experience", experienceRouter);
+// update experiences with yelp data
 app.use("/api/rating", ratingRouter);
+// post and get photos from S3
 app.use("/api/upload", photoRouter);
 
 // Serve static files
