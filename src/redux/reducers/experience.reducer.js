@@ -1,3 +1,5 @@
+// experienceReducer holds either the user's experiences or all of them;
+// page-dependent
 const experienceReducer = (state = [], action) => {
   switch (action.type) {
     case "SET_EXPERIENCES":

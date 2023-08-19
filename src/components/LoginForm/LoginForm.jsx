@@ -12,11 +12,13 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 
 function LoginForm() {
+  // state, store, hooks init
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const errors = useSelector((store) => store.errors);
   const dispatch = useDispatch();
 
+  // login event handler
   const login = (event) => {
     event.preventDefault();
 

@@ -23,6 +23,7 @@ function LoginPage() {
     setRandomImage(path);
   };
 
+  // random image path picker
   const getRandomPic = (paths) => {
     const idx = Math.floor(Math.random() * paths.length);
     return paths[idx].photo_path;

@@ -1,5 +1,7 @@
 import { put, takeEvery } from "redux-saga/effects";
 
+// saga to query yelp api and send put request
+// to update experiences with the yelp data
 function* fetchData(action) {
   try {
     const response = yield fetch(

@@ -24,16 +24,22 @@ function EntryPage() {
 
   // snackbar state
   const [snackOpen, setSnackOpen] = useState(false);
+
   // tooltip state
   const [tooltipOpen, setTooltipOpen] = useState(false);
+
   // Selected image file name
   const [fileName, setFileName] = useState("");
+
   // Selected file type
   const [fileType, setFileType] = useState("");
+
   // Selected image file
   const [selectedFile, setSelectedFile] = useState();
+
   // tags state
   const [tags, setTags] = useState([]);
+
   // overall experience state
   const [experienceToSend, setExperienceToSend] = useState({
     exp_name: "",
@@ -90,7 +96,6 @@ function EntryPage() {
   };
 
   // function that handles adding a tag to the tag state
-  // TODO - add tooltip to tell user to separate by spacebar
   const handleKeyPress = (e) => {
     if (e.key === "," || e.key === " ") {
       // handle the comma persisting
@@ -108,8 +113,7 @@ function EntryPage() {
     // Access the selected file
     const fileToUpload = event.target.files[0];
 
-    // Resize and compress the image. Remove this if using something other
-    // than an image upload.
+    // Resize and compress the image
     const copyFile = new Blob([fileToUpload], {
       type: fileToUpload.type,
       name: fileToUpload.name,

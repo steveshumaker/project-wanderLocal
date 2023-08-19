@@ -1,27 +1,24 @@
 import React, { useEffect } from "react";
+// routing imports
 import {
   HashRouter as Router,
   Redirect,
   Route,
   Switch,
 } from "react-router-dom";
-
 import { useDispatch, useSelector } from "react-redux";
-
+// page imports
 import Nav from "../Nav/Nav";
 import Footer from "../Footer/Footer";
-
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
-
 import AboutPage from "../AboutPage/AboutPage";
-import UserPage from "../UserPage/UserPage";
-import LandingPage from "../LandingPage/LandingPage";
 import LoginPage from "../LoginPage/LoginPage";
 import RegisterPage from "../RegisterPage/RegisterPage";
 import DisplayPage from "../DisplayPage/DisplayPage";
 import EntryPage from "../EntryPage/EntryPage";
 import FavoritesPage from "../FavoritesPage/FavoritesPage";
 import SearchPage from "../SearchPage/SearchPage";
+// MUI
 import { createTheme } from "@mui/material";
 import { ThemeProvider } from "@emotion/react";
 
@@ -32,6 +29,7 @@ function App() {
 
   const user = useSelector((store) => store.user);
 
+  // MUI theme options
   const themeOptions = {
     palette: {
       type: "light",
@@ -86,15 +84,6 @@ function App() {
             Visiting localhost:3000/user will show the UserPage if the user is logged in.
             If the user is not logged in, the ProtectedRoute will show the LoginPage (component).
             Even though it seems like they are different pages, the user is always on localhost:3000/user */}
-
-            {/* <ProtectedRoute
-            // logged in shows UserPage else shows LoginPage
-            exact
-            path="/user"
-          >
-            <UserPage />
-          </ProtectedRoute> */}
-
 
             <ProtectedRoute exact path="/display">
               <DisplayPage />

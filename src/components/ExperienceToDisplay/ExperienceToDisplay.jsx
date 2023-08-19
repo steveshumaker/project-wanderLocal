@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
-//MUI
+// MUI
 import Button from "@mui/material/Button";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
@@ -26,6 +26,7 @@ function ExperienceToDisplay({ experience, userId }) {
   // init dispatch
   const dispatch = useDispatch();
 
+  // editing state handler if an item is selected
   const isEditing = experience.this_id === editingId;
 
   // handles the save button click; cancel handled in jsx
@@ -75,6 +76,7 @@ function ExperienceToDisplay({ experience, userId }) {
 
   return (
     <div key={experience.this_id}>
+      {/* EDITING */}
       {isEditing ? (
         <Card
           sx={{
@@ -139,6 +141,7 @@ function ExperienceToDisplay({ experience, userId }) {
           </CardContent>
         </Card>
       ) : (
+        // -- DISPLAYING --
         <Card
           sx={{
             height: "100%",

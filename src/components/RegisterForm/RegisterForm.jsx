@@ -11,6 +11,7 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 
 function RegisterForm() {
+  // state, store, and hooks init
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const errors = useSelector((store) => store.errors);

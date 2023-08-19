@@ -1,5 +1,6 @@
 import { put, takeEvery } from "redux-saga/effects";
 
+// function that handles fetching all experiences
 function* fetchAllExperiences() {
   try {
     const response = yield fetch("/api/experience/all");
@@ -13,6 +14,10 @@ function* fetchAllExperiences() {
   }
 }
 
+// function that handles the fetching and cleaning of tags.
+// first queries the '/all' route, then reduces the array to those
+// that are defined, then flattens it, then creates a new set to remove
+// duplicates.
 function* fetchAllTags() {
   try {
     const response = yield fetch("/api/experience/all");

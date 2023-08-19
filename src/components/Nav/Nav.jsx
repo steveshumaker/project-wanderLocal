@@ -1,12 +1,9 @@
 import React from "react";
-// import { Link } from "react-router-dom";
 import LogOutButton from "../LogOutButton/LogOutButton";
 import "./Nav.css";
 import { useSelector, useDispatch } from "react-redux";
-import { useHistory } from "react-router-dom";
 // MUI
 import AppBar from "@mui/material/AppBar";
-
 import { Link as rLink } from "react-router-dom";
 import CssBaseline from "@mui/material/CssBaseline";
 import Toolbar from "@mui/material/Toolbar";
@@ -58,6 +55,7 @@ function Nav() {
 
           <nav>
             <div>
+              {/* render certain links if the user is logged in */}
               {!user.id && (
                 <Link
                   variant="button"

@@ -1,5 +1,6 @@
 import { put, takeEvery } from "redux-saga/effects";
 
+// general fetching and setting of experiences
 function* fetchExperiences() {
   try {
     const response = yield fetch("/api/experience");
@@ -13,6 +14,9 @@ function* fetchExperiences() {
   }
 }
 
+// saga to handle adding an experience.
+// it also handles dispatching the put call for updating
+// the experience with data from yelp
 function* addExperience(action) {
   try {
     const response = yield fetch("/api/experience", {
@@ -41,6 +45,7 @@ function* addExperience(action) {
   }
 }
 
+// more general put route to handle updates
 function* updateExperience(action) {
   try {
     const response = yield fetch("/api/experience", {
@@ -59,6 +64,7 @@ function* updateExperience(action) {
   }
 }
 
+// function to handle toggling the external data display switch
 function* toggleExternal(action) {
   try {
     const response = yield fetch("/api/experience/toggleExternal", {
@@ -77,6 +83,7 @@ function* toggleExternal(action) {
   }
 }
 
+// function that handles deleting
 function* deleteExperience(action) {
   try {
     const response = yield fetch("/api/experience", {

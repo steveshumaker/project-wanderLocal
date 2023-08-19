@@ -11,6 +11,7 @@ function Footer() {
     <footer>
       &copy; Steve Shumaker
       <hr />
+      {/* yelp attribution */}
       Ratings and reviews powered by{" "}
       <a target="_blank" href="https://www.yelp.com">
         <img

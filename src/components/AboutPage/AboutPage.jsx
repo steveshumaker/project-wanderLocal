@@ -12,15 +12,18 @@ import Typography from "@mui/material/Typography";
 import ImageListItemBar from "@mui/material/ImageListItemBar";
 
 function AboutPage() {
+  // state for the image list and loading state
   const [imageList, setImageList] = useState([]);
   const [loaded, setLoaded] = useState(false);
 
+  // client-side fetch to api that returns an array of image urls
   const getUrl = async () => {
     const promise = await fetch("/api/upload/random");
     const fetchedUrls = await promise.json();
     setImageList([...imageList, fetchedUrls]);
   };
 
+  // on mount, ensure the api call completes
   useEffect(() => {
     getUrl();
     setTimeout(() => {

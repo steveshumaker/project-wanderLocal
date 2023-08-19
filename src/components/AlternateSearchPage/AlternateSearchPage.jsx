@@ -23,6 +23,9 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import FilterListIcon from "@mui/icons-material/FilterList";
 import { visuallyHidden } from "@mui/utils";
 
+// TODO - implement filter feature
+
+// MUI table helpers
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
     return -1;
@@ -104,17 +107,6 @@ function EnhancedTableHead(props) {
   return (
     <TableHead>
       <TableRow>
-        {/* <TableCell padding="checkbox"> --- REMOVED TO REMOVE SELECTING ---
-          <Checkbox
-            color="primary"
-            indeterminate={numSelected > 0 && numSelected < rowCount}
-            checked={rowCount > 0 && numSelected === rowCount}
-            onChange={onSelectAllClick}
-            inputProps={{
-              "aria-label": "select all experiences",
-            }}
-          />
-        </TableCell> */}
         {headCells.map((headCell) => (
           <TableCell
             key={headCell.id}
@@ -187,11 +179,12 @@ function EnhancedTableToolbar(props) {
         </Typography>
       )}
 
-      <Tooltip title="Filter list">
+      {/* Commented until implemented */}
+      {/* <Tooltip title="Filter list">
         <IconButton>
           <FilterListIcon />
         </IconButton>
-      </Tooltip>
+      </Tooltip> */}
     </Toolbar>
   );
 }
@@ -287,7 +280,6 @@ function AlternateSearchPage() {
               numSelected={selected.length}
               order={order}
               orderBy={orderBy}
-              // onSelectAllClick={handleSelectAllClick} -- REMOVED FOR NO SELECTING --
               onRequestSort={handleRequestSort}
               rowCount={rows.length}
             />
@@ -307,15 +299,6 @@ function AlternateSearchPage() {
                     selected={isItemSelected}
                     sx={{ cursor: "pointer" }}
                   >
-                    {/* <TableCell padding="normal">
-                      <Checkbox
-                        color="primary"
-                        checked={isItemSelected}
-                        inputProps={{
-                          "aria-labelledby": labelId,
-                        }}
-                      />
-                    </TableCell> */}
                     <TableCell
                       component="th"
                       id={labelId}

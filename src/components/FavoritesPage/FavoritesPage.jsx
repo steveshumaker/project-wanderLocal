@@ -9,9 +9,12 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 
 function FavoritesPage() {
+  // store and hook inits
   const dispatch = useDispatch();
   const user = useSelector((store) => store.user);
   const experiences = useSelector((store) => store.experience);
+
+  // filter experiences for only favorites that match the userID
   const favorites = experiences.filter((experience) => {
     return experience.favorite === true;
   });
