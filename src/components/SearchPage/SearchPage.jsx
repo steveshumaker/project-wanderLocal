@@ -12,29 +12,24 @@ import Grid from "@mui/material/Grid";
 import Autocomplete from "@mui/material/Autocomplete";
 import TextField from "@mui/material/TextField";
 import Link from "@mui/material/Link";
+import LinearProgress from "@mui/material/LinearProgress";
 
 function SearchPage() {
   const dispatch = useDispatch();
-  // STATE
 
+  // STATE
   // Access experiences from store
   const experiences = useSelector((store) => store.search);
+  const finalTags = useSelector((store) => store.tags);
 
   // Search state
   const [search, setSearch] = useState([]);
-
-  // Tags state
-  const [tagList, setTagList] = useState([]);
 
   // Render state
   const [shouldRender, setShouldRender] = useState(false);
 
   // Alternate search state
   const [altState, setAltState] = useState(false);
-
-  // Tags array manipulation - flatten and remove dupes
-  const flatTags = tagList.flat();
-  const finalTags = [...new Set(flatTags)];
 
   // Handling tag search
   const handleTagsChange = (event, newValue) => {
@@ -43,25 +38,21 @@ function SearchPage() {
 
   // Page useEffect:
   // - On comp load:
-  // - - for tags: create 2d tags array
-  // - - for search: TODO
+  // - - dispatch actions to 1. fetch/set all experiences and 2.
+  // fetch/set final tags list (now handling all logic on back end)
   useEffect(() => {
     console.log("PAGE LOADED");
-    // Set the tag list on page load
     dispatch({ type: "FETCH_ALL_EXPERIENCES" });
-    setTimeout(() => {}, 1000);
-    if (experiences.length > 0) {
-      experiences.map((experience) => {
-        if (experience.tags !== null) {
-          setTagList((oldTags) => [...oldTags, experience.tags]);
-        }
-      });
-    }
+    dispatch({ type: "FETCH_AND_SET_TAGS" });
     setShouldRender(true);
   }, []);
 
   if (!shouldRender) {
-    return <div>Loading...</div>;
+    return (
+      <Box sx={{ width: "100%" }}>
+        <LinearProgress />
+      </Box>
+    );
   }
 
   return (
@@ -71,7 +62,6 @@ function SearchPage() {
         variant="h2"
         align="center"
         color="text.primary"
-        // gutterBottom
       >
         experiences.
       </Typography>
@@ -121,7 +111,7 @@ function SearchPage() {
                     <TextField
                       {...params}
                       label="search."
-                      placeholder="tags."
+                      placeholder="select tags that fit what you're looking for!"
                     />
                   )}
                 />
