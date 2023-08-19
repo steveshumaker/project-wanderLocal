@@ -12,6 +12,7 @@ import Grid from "@mui/material/Grid";
 import Autocomplete from "@mui/material/Autocomplete";
 import TextField from "@mui/material/TextField";
 import Link from "@mui/material/Link";
+import LinearProgress from "@mui/material/LinearProgress";
 
 function SearchPage() {
   const dispatch = useDispatch();
@@ -47,7 +48,11 @@ function SearchPage() {
   }, []);
 
   if (!shouldRender) {
-    return <div>Loading...</div>;
+    return (
+      <Box sx={{ width: "100%" }}>
+        <LinearProgress />
+      </Box>
+    );
   }
 
   return (
