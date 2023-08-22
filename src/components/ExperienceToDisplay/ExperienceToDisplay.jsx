@@ -56,7 +56,7 @@ function ExperienceToDisplay({ experience, userId }) {
   const handleFavoriteClick = (experience) => {
     console.log("favoriting id: ", experience.this_id);
     dispatch({
-      type: "UPDATE_EXPERIENCE",
+      type: "UPDATE_EXPERIENCE", 
       payload: { favId: experience.this_id, favorite: experience.favorite },
     });
   };
@@ -66,7 +66,7 @@ function ExperienceToDisplay({ experience, userId }) {
     const updatedToggle = !checked;
     setChecked(updatedToggle);
     dispatch({
-      type: "UPDATE_SHOW_EXTERNAL",
+      type: "SHOW_EXTERNAL_UPDATE", // WHY IS THIS NOT WORKING
       payload: {
         expId: experience.this_id,
         toggle_ext: updatedToggle,

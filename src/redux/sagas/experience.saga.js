@@ -66,8 +66,9 @@ function* updateExperience(action) {
 
 // function to handle toggling the external data display switch
 function* toggleExternal(action) {
+  console.log("IN TOGGLING");
   try {
-    const response = yield fetch("/api/experience/toggleExternal", {
+    const response = yield fetch(`/api/experience/toggleExternal`, {
       method: "PUT",
       body: JSON.stringify(action.payload),
       headers: {
@@ -103,11 +104,11 @@ function* deleteExperience(action) {
 }
 
 function* experienceSaga() {
-  yield takeEvery("FETCH_USER_EXPERIENCE", fetchExperiences),
-    yield takeEvery("ADD_USER_EXPERIENCE", addExperience),
-    yield takeEvery("UPDATE_EXPERIENCE", updateExperience),
-    yield takeEvery("DELETE_EXPERIENCE", deleteExperience),
-    yield takeEvery("UPDATE_SHOW_EXTERNAL", toggleExternal);
+  yield takeEvery("FETCH_USER_EXPERIENCE", fetchExperiences);
+  yield takeEvery("ADD_USER_EXPERIENCE", addExperience);
+  yield takeEvery("UPDATE_EXPERIENCE", updateExperience);
+  yield takeEvery("DELETE_EXPERIENCE", deleteExperience);
+  yield takeEvery("SHOW_EXTERNAL_UPDATE", toggleExternal);
 }
 
 export default experienceSaga;

@@ -113,7 +113,6 @@ router.put("/", rejectUnauthenticated, (req, res) => {
       });
     // if this is a normal edit
   } else {
-    console.log("here");
     QUERY = `UPDATE experiences SET name=$1, description=$2, web_path=$3, location_desc=$4 WHERE id=$5;`;
 
     pool
