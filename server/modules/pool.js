@@ -22,8 +22,8 @@ else {
     user: process.env.POSTGRES_USER,
     database: process.env.POSTGRES_DB,
     password: process.env.POSTGRES_PASSWORD,
-    // host: "localhost", -- UNCOMMENT FOR LOCAL DEVELOPMENT --
-    host: "postgres",
+    host: "localhost", // -- UNCOMMENT FOR LOCAL DEVELOPMENT --
+    // host: "postgres",
     port: 5432,
   });
 }
