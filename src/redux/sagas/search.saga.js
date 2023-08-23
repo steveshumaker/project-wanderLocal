@@ -31,7 +31,7 @@ function* fetchAllTags() {
       }
       return tags;
     }, []);
-    const flatTags = yield initialTags.flat();
+    const flatTags = yield initialTags.flat().sort();
     const finalTags = yield [...new Set(flatTags)];
     yield put({ type: "SET_FINAL_TAGS", payload: finalTags });
   } catch (error) {
