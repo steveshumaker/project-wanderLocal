@@ -7,7 +7,6 @@ router.get("/:name/:location", (req, res) => {
   const busName = req.params.name;
   const busLoc = req.params.location;
 
-  console.log("FETCHING BUSINESS --> ", busName);
   fetch(
     `https://api.yelp.com/v3/businesses/search?location=${busLoc}&term=${busName}&limit=1&sort_by=best_match`,
     {

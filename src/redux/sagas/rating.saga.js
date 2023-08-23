@@ -11,7 +11,6 @@ function* fetchData(action) {
       throw new Error("Network response getting business details not OK");
     }
     const data = yield response.json();
-    console.log("PARSED DATA --> ", data);
     yield put({
       type: "UPDATE_EXPERIENCE",
       payload: {

@@ -41,7 +41,6 @@ function SearchPage() {
   // - - dispatch actions to 1. fetch/set all experiences and 2.
   // fetch/set final tags list (now handling all logic on back end)
   useEffect(() => {
-    console.log("PAGE LOADED");
     dispatch({ type: "FETCH_ALL_EXPERIENCES" });
     dispatch({ type: "FETCH_AND_SET_TAGS" });
     setShouldRender(true);

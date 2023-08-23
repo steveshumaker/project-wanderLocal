@@ -33,7 +33,6 @@ function* fetchAllTags() {
     }, []);
     const flatTags = yield initialTags.flat();
     const finalTags = yield [...new Set(flatTags)];
-    console.log(finalTags);
     yield put({ type: "SET_FINAL_TAGS", payload: finalTags });
   } catch (error) {
     console.log(error);

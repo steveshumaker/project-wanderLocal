@@ -41,7 +41,6 @@ router.get("/all", (req, res) => {
 
 // post an experience
 router.post("/", rejectUnauthenticated, (req, res) => {
-  console.log("IN POST");
   const {
     exp_name,
     description,

@@ -54,7 +54,6 @@ function ExperienceToDisplay({ experience, userId }) {
 
   // toggle functionality for favorite button
   const handleFavoriteClick = (experience) => {
-    console.log("favoriting id: ", experience.this_id);
     dispatch({
       type: "UPDATE_EXPERIENCE", 
       payload: { favId: experience.this_id, favorite: experience.favorite },

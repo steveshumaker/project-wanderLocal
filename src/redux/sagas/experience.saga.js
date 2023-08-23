@@ -66,7 +66,6 @@ function* updateExperience(action) {
 
 // function to handle toggling the external data display switch
 function* toggleExternal(action) {
-  console.log("IN TOGGLING");
   try {
     const response = yield fetch(`/api/experience/toggleExternal`, {
       method: "PUT",
