@@ -138,6 +138,7 @@ COPY public.experiences (id, name, description, web_path, photo_path, user_id, f
 104	Movies		https://www.yelp.com/biz/regal-opry-mills-nashville?adjust_creative=-TGTFsrzc1-fT05jd77_rg&utm_campaign=yelp_api_v3&utm_medium=api_v3_business_search&utm_source=-TGTFsrzc1-fT05jd77_rg	\N	3	f	122	3.5	Nashville, TN	{barbie,fun,friends}	https://s3-media3.fl.yelpcdn.com/bphoto/aT1xeNxsew8nH3_RRGw5Mg/o.jpg	t
 151	Sally's Pizza	A good pizza spot	https://www.yelp.com/biz/sallys-apizza-new-haven?adjust_creative=-TGTFsrzc1-fT05jd77_rg&utm_campaign=yelp_api_v3&utm_medium=api_v3_business_search&utm_source=-TGTFsrzc1-fT05jd77_rg	\N	1	t	1224	3.5	New Haven, CT	{pizza,ct,best}	https://s3-media4.fl.yelpcdn.com/bphoto/t289D77T4o3QQz2Ty83QYQ/o.jpg	t
 179	The Biltmore	A tapestry	https://www.yelp.com/biz/biltmore-estate-asheville?adjust_creative=-TGTFsrzc1-fT05jd77_rg&utm_campaign=yelp_api_v3&utm_medium=api_v3_business_search&utm_source=-TGTFsrzc1-fT05jd77_rg	https://wanderlocal-images.s3.amazonaws.com/images/1/2a5e04db48caebebc6678dcb90e9bc0d	1	f	1447	4	Asheville, NC	{}	https://s3-media3.fl.yelpcdn.com/bphoto/dY8C8coTnjBNX-0Bq334mA/o.jpg	t
+189	Sonny's	A fun sports bar close to my place	https://www.yelp.com/biz/sonnys-patio-pub-and-refuge-nashville-2?adjust_creative=-TGTFsrzc1-fT05jd77_rg&utm_campaign=yelp_api_v3&utm_medium=api_v3_business_search&utm_source=-TGTFsrzc1-fT05jd77_rg	\N	1	t	104	4	nashville, tn	{sonnys,pub,and,refugee,fun,bar}	https://s3-media4.fl.yelpcdn.com/bphoto/nZFpXN3PBFeCLLLLziOeug/o.jpg	t
 \.
 
 
@@ -161,7 +162,7 @@ COPY public."user" (id, username, password) FROM stdin;
 -- Name: experiences_id_seq; Type: SEQUENCE SET; Schema: public; Owner: shu
 --
 
-SELECT pg_catalog.setval('public.experiences_id_seq', 188, true);
+SELECT pg_catalog.setval('public.experiences_id_seq', 189, true);
 
 
 --

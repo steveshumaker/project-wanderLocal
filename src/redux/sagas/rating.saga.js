@@ -3,6 +3,7 @@ import { put, takeEvery } from "redux-saga/effects";
 // saga to query yelp api and send put request
 // to update experiences with the yelp data
 function* fetchData(action) {
+  console.log("FETCHING BUSINESS");
   try {
     const response = yield fetch(
       `/api/rating/${action.payload.name}/${action.payload.location_desc}`
@@ -11,6 +12,7 @@ function* fetchData(action) {
       throw new Error("Network response getting business details not OK");
     }
     const data = yield response.json();
+    console.log("DATA RETURNED --> ", data);
     yield put({
       type: "UPDATE_EXPERIENCE",
       payload: {
