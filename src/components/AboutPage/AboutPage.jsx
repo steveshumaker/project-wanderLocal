@@ -10,6 +10,7 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import ImageListItemBar from "@mui/material/ImageListItemBar";
+import { Link } from "@mui/material";
 
 function AboutPage() {
   // state for the image list and loading state
@@ -87,11 +88,26 @@ function AboutPage() {
                 </Typography>
               </CardContent>
             </Card>
-            <Card raised>
+            <Card raised sx={{ mb: "10px" }}>
               <CardContent sx={{ textAlign: "center" }}>
                 <Typography sx={{ fontSize: 14 }} color="text.primary">
                   Technologies used: PostgreSQL, Express, React, Node.js,
                   MaterialUI, AWS S3, JavaScript
+                </Typography>
+              </CardContent>
+            </Card>
+            <Card raised>
+              <CardContent sx={{ textAlign: "center" }}>
+                <Typography sx={{ fontSize: 14 }} color="text.primary">
+                  If you're here and potentially considering an MBA - give{" "}
+                  <Link
+                    href="https://www.smartwithaheart.org/"
+                    underline="hover"
+                    target="blank"
+                  >
+                    Smart with a Heart
+                  </Link>{" "}
+                  a look!
                 </Typography>
               </CardContent>
             </Card>
